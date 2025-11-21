@@ -2,7 +2,7 @@
 import os
 import json
 from datetime import datetime
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 
 HISTORY_FILE = "scan_history.json"
 
@@ -45,7 +45,7 @@ def add_scan_result(
     return entry
 
 
-def list_history(datasource_id: str | None = None) -> List[Dict[str, Any]]:
+def list_history(datasource_id: Optional[str] = None) -> List[Dict[str, Any]]:
     """
     Return all history, or only entries for a specific datasource.
     """
@@ -53,3 +53,14 @@ def list_history(datasource_id: str | None = None) -> List[Dict[str, Any]]:
     if datasource_id:
         return [h for h in history if h.get("datasource_id") == datasource_id]
     return history
+
+
+def get_history_entry(entry_id: int) -> Optional[Dict[str, Any]]:
+    """
+    Return a single history entry by its numeric id.
+    """
+    history = _read_history()
+    for entry in history:
+        if entry.get("id") == entry_id:
+            return entry
+    return None

@@ -1,13 +1,13 @@
 # F:\algograss\backend\scanner_api.py
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends, Header
+from fastapi.responses import JSONResponse
 import os
 import json
 import psycopg2
 
-from scan_history import add_scan_result, list_history
+from scan_history import add_scan_result, list_history, get_history_entry
 
 DB_FILE = "datasources.json"
-router = APIRouter()
 
 
 def read_db():
@@ -18,6 +18,24 @@ def read_db():
             return json.load(f)
         except json.JSONDecodeError:
             return []
+
+
+def verify_api_key(x_api_key: str | None = Header(default=None)):
+    """
+    Optional API key auth.
+    If environment variable ALGOGRASS_API_KEY is set,
+    all requests must include header: X-API-Key: <that value>.
+    If the env var is NOT set, auth is effectively disabled.
+    """
+    expected = os.getenv("ALGOGRASS_API_KEY")
+    if not expected:
+        # Auth disabled
+        return
+    if x_api_key != expected:
+        raise HTTPException(status_code=401, detail="Invalid or missing API key")
+
+
+router = APIRouter(dependencies=[Depends(verify_api_key)])
 
 
 def classify_column_pii(column_name: str):
@@ -46,6 +64,67 @@ def classify_column_pii(column_name: str):
     return reasons
 
 
+def compute_table_risk(table_cols: list[dict]) -> dict:
+    """
+    Compute risk stats for a single table.
+    Returns dict with total_columns, pii_columns, pii_ratio, risk_level.
+    """
+
+    total_cols = len(table_cols)
+    pii_cols = sum(1 for c in table_cols if c.get("pii"))
+
+    if total_cols == 0:
+        pii_ratio = 0.0
+    else:
+        pii_ratio = pii_cols / total_cols
+
+    # Check for "high sensitivity" PII indicators
+    high_sensitivity_types = {"email", "phone", "card_number", "national_id"}
+    high_sensitivity_present = False
+
+    for col in table_cols:
+        if not col.get("pii"):
+            continue
+        reasons = set(col.get("pii_reason") or [])
+        if reasons & high_sensitivity_types:
+            high_sensitivity_present = True
+            break
+
+    # Basic risk rules
+    # (you can tweak these later as product “policy”)
+    if pii_cols == 0:
+        risk_level = "none"
+    elif pii_ratio > 0.30 or (high_sensitivity_present and pii_cols >= 3):
+        risk_level = "high"
+    elif pii_ratio > 0.10:
+        risk_level = "medium"
+    else:
+        risk_level = "low"
+
+    return {
+        "total_columns": total_cols,
+        "pii_columns": pii_cols,
+        "pii_ratio": pii_ratio,
+        "risk_level": risk_level,
+    }
+
+
+def compute_overall_risk(table_risks: dict) -> str:
+    """
+    Aggregate per-table risk into a single overall risk level.
+    Priority: high > medium > low > none.
+    """
+    levels = [info.get("risk_level", "none") for info in table_risks.values()]
+
+    if any(l == "high" for l in levels):
+        return "high"
+    if any(l == "medium" for l in levels):
+        return "medium"
+    if any(l == "low" for l in levels):
+        return "low"
+    return "none"
+
+
 @router.get("/{ds_id}")
 def scan_datasource(ds_id: str):
     """
@@ -54,6 +133,7 @@ def scan_datasource(ds_id: str):
     - Connects to Postgres (Supabase) using psycopg2
     - Reads schema from information_schema.columns
     - Marks PII columns based on name
+    - Computes table-level & overall risk
     - Saves scan result into scan_history.json
     """
 
@@ -140,7 +220,7 @@ def scan_datasource(ds_id: str):
             detail=f"Error scanning schema: {str(e)}",
         )
 
-    # Build a summary
+    # Build global summary
     total_cols = 0
     pii_cols = 0
     for cols in result.values():
@@ -149,10 +229,21 @@ def scan_datasource(ds_id: str):
             if col.get("pii"):
                 pii_cols += 1
 
+    pii_ratio = (pii_cols / total_cols) if total_cols else 0.0
+
+    # Per-table risk
+    table_risks: dict[str, dict] = {}
+    for table_name, cols in result.items():
+        table_risks[table_name] = compute_table_risk(cols)
+
+    overall_risk = compute_overall_risk(table_risks)
+
     summary = {
         "total_columns": total_cols,
         "pii_columns": pii_cols,
-        "pii_ratio": (pii_cols / total_cols) if total_cols else 0.0,
+        "pii_ratio": pii_ratio,
+        "overall_risk": overall_risk,
+        "table_risks": table_risks,
     }
 
     # Save scan in history
@@ -181,3 +272,27 @@ def get_history_for_datasource(ds_id: str):
     Return all scan runs for a specific datasource.
     """
     return list_history(ds_id)
+
+
+@router.get("/export/{entry_id}")
+def export_scan(entry_id: int):
+    """
+    Download a JSON file for a specific scan history entry.
+    """
+    entry = get_history_entry(entry_id)
+    if not entry:
+        raise HTTPException(status_code=404, detail="Scan history entry not found")
+
+    payload = {
+        "datasource_id": entry["datasource_id"],
+        "scanned_at": entry["scanned_at"],
+        "summary": entry.get("summary", {}),
+        "schema": entry.get("schema", {}),
+    }
+
+    return JSONResponse(
+        content=payload,
+        headers={
+            "Content-Disposition": f'attachment; filename="scan_{entry_id}.json"'
+        },
+    )

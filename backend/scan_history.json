@@ -2,7 +2,7 @@
   {
     "id": 1,
     "datasource_id": "e40fd114-1904-424b-ba86-385ac017506a",
-    "scanned_at": "2025-11-21T15:01:52.088691Z",
+    "scanned_at": "2025-11-21T15:37:07.088422Z",
     "summary": {
       "total_columns": 340,
       "pii_columns": 21,
@@ -2168,7 +2168,7 @@
   {
     "id": 2,
     "datasource_id": "e40fd114-1904-424b-ba86-385ac017506a",
-    "scanned_at": "2025-11-21T15:09:09.472273Z",
+    "scanned_at": "2025-11-21T15:37:20.626754Z",
     "summary": {
       "total_columns": 340,
       "pii_columns": 21,
@@ -4334,11 +4334,224 @@
   {
     "id": 3,
     "datasource_id": "e40fd114-1904-424b-ba86-385ac017506a",
-    "scanned_at": "2025-11-21T15:10:21.534505Z",
+    "scanned_at": "2025-11-21T15:48:36.183508Z",
     "summary": {
       "total_columns": 340,
       "pii_columns": 21,
-      "pii_ratio": 0.061764705882352944
+      "pii_ratio": 0.061764705882352944,
+      "overall_risk": "high",
+      "table_risks": {
+        "auth.audit_log_entries": {
+          "total_columns": 5,
+          "pii_columns": 1,
+          "pii_ratio": 0.2,
+          "risk_level": "medium"
+        },
+        "auth.flow_state": {
+          "total_columns": 12,
+          "pii_columns": 0,
+          "pii_ratio": 0.0,
+          "risk_level": "none"
+        },
+        "auth.identities": {
+          "total_columns": 9,
+          "pii_columns": 1,
+          "pii_ratio": 0.1111111111111111,
+          "risk_level": "medium"
+        },
+        "auth.instances": {
+          "total_columns": 5,
+          "pii_columns": 0,
+          "pii_ratio": 0.0,
+          "risk_level": "none"
+        },
+        "auth.mfa_amr_claims": {
+          "total_columns": 5,
+          "pii_columns": 0,
+          "pii_ratio": 0.0,
+          "risk_level": "none"
+        },
+        "auth.mfa_challenges": {
+          "total_columns": 7,
+          "pii_columns": 1,
+          "pii_ratio": 0.14285714285714285,
+          "risk_level": "medium"
+        },
+        "auth.mfa_factors": {
+          "total_columns": 13,
+          "pii_columns": 1,
+          "pii_ratio": 0.07692307692307693,
+          "risk_level": "low"
+        },
+        "auth.oauth_authorizations": {
+          "total_columns": 16,
+          "pii_columns": 0,
+          "pii_ratio": 0.0,
+          "risk_level": "none"
+        },
+        "auth.oauth_clients": {
+          "total_columns": 12,
+          "pii_columns": 0,
+          "pii_ratio": 0.0,
+          "risk_level": "none"
+        },
+        "auth.oauth_consents": {
+          "total_columns": 6,
+          "pii_columns": 0,
+          "pii_ratio": 0.0,
+          "risk_level": "none"
+        },
+        "auth.one_time_tokens": {
+          "total_columns": 7,
+          "pii_columns": 0,
+          "pii_ratio": 0.0,
+          "risk_level": "none"
+        },
+        "auth.refresh_tokens": {
+          "total_columns": 9,
+          "pii_columns": 0,
+          "pii_ratio": 0.0,
+          "risk_level": "none"
+        },
+        "auth.saml_providers": {
+          "total_columns": 9,
+          "pii_columns": 0,
+          "pii_ratio": 0.0,
+          "risk_level": "none"
+        },
+        "auth.saml_relay_states": {
+          "total_columns": 8,
+          "pii_columns": 1,
+          "pii_ratio": 0.125,
+          "risk_level": "medium"
+        },
+        "auth.schema_migrations": {
+          "total_columns": 1,
+          "pii_columns": 0,
+          "pii_ratio": 0.0,
+          "risk_level": "none"
+        },
+        "auth.sessions": {
+          "total_columns": 14,
+          "pii_columns": 1,
+          "pii_ratio": 0.07142857142857142,
+          "risk_level": "low"
+        },
+        "auth.sso_domains": {
+          "total_columns": 5,
+          "pii_columns": 0,
+          "pii_ratio": 0.0,
+          "risk_level": "none"
+        },
+        "auth.sso_providers": {
+          "total_columns": 5,
+          "pii_columns": 0,
+          "pii_ratio": 0.0,
+          "risk_level": "none"
+        },
+        "auth.users": {
+          "total_columns": 35,
+          "pii_columns": 12,
+          "pii_ratio": 0.34285714285714286,
+          "risk_level": "high"
+        },
+        "extensions.pg_stat_statements": {
+          "total_columns": 49,
+          "pii_columns": 0,
+          "pii_ratio": 0.0,
+          "risk_level": "none"
+        },
+        "extensions.pg_stat_statements_info": {
+          "total_columns": 2,
+          "pii_columns": 0,
+          "pii_ratio": 0.0,
+          "risk_level": "none"
+        },
+        "realtime.messages": {
+          "total_columns": 8,
+          "pii_columns": 0,
+          "pii_ratio": 0.0,
+          "risk_level": "none"
+        },
+        "realtime.schema_migrations": {
+          "total_columns": 2,
+          "pii_columns": 0,
+          "pii_ratio": 0.0,
+          "risk_level": "none"
+        },
+        "realtime.subscription": {
+          "total_columns": 7,
+          "pii_columns": 1,
+          "pii_ratio": 0.14285714285714285,
+          "risk_level": "medium"
+        },
+        "storage.buckets": {
+          "total_columns": 11,
+          "pii_columns": 0,
+          "pii_ratio": 0.0,
+          "risk_level": "none"
+        },
+        "storage.buckets_analytics": {
+          "total_columns": 7,
+          "pii_columns": 0,
+          "pii_ratio": 0.0,
+          "risk_level": "none"
+        },
+        "storage.buckets_vectors": {
+          "total_columns": 4,
+          "pii_columns": 0,
+          "pii_ratio": 0.0,
+          "risk_level": "none"
+        },
+        "storage.migrations": {
+          "total_columns": 4,
+          "pii_columns": 0,
+          "pii_ratio": 0.0,
+          "risk_level": "none"
+        },
+        "storage.objects": {
+          "total_columns": 13,
+          "pii_columns": 0,
+          "pii_ratio": 0.0,
+          "risk_level": "none"
+        },
+        "storage.prefixes": {
+          "total_columns": 5,
+          "pii_columns": 0,
+          "pii_ratio": 0.0,
+          "risk_level": "none"
+        },
+        "storage.s3_multipart_uploads": {
+          "total_columns": 9,
+          "pii_columns": 0,
+          "pii_ratio": 0.0,
+          "risk_level": "none"
+        },
+        "storage.s3_multipart_uploads_parts": {
+          "total_columns": 10,
+          "pii_columns": 0,
+          "pii_ratio": 0.0,
+          "risk_level": "none"
+        },
+        "storage.vector_indexes": {
+          "total_columns": 9,
+          "pii_columns": 0,
+          "pii_ratio": 0.0,
+          "risk_level": "none"
+        },
+        "vault.decrypted_secrets": {
+          "total_columns": 9,
+          "pii_columns": 1,
+          "pii_ratio": 0.1111111111111111,
+          "risk_level": "medium"
+        },
+        "vault.secrets": {
+          "total_columns": 8,
+          "pii_columns": 1,
+          "pii_ratio": 0.125,
+          "risk_level": "medium"
+        }
+      }
     },
     "schema": {
       "auth.audit_log_entries": [

@@ -29,7 +29,25 @@
     }
     .sidebar small {
       color: #9ca3af;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
+    }
+    .api-key-box {
+      margin-bottom: 10px;
+    }
+    .api-key-box label {
+      display: block;
+      font-size: 11px;
+      color: #9ca3af;
+      margin-bottom: 4px;
+    }
+    .api-key-box input {
+      width: 100%;
+      padding: 6px 8px;
+      border-radius: 6px;
+      border: 1px solid #1f2937;
+      background: #020617;
+      color: #e5e7eb;
+      font-size: 12px;
     }
     .btn {
       border: none;
@@ -103,7 +121,7 @@
     .panels {
       display: grid;
       grid-template-columns: 1.1fr 1.4fr;
-      grid-template-rows: 180px auto;
+      grid-template-rows: 220px auto;
       gap: 12px;
       flex: 1;
       min-height: 0;
@@ -127,7 +145,7 @@
     }
     .card h3 {
       font-size: 13px;
-      margin: 8px 0 2px 0;
+      margin: 8px 0 4px 0;
     }
     .tag {
       display: inline-block;
@@ -225,12 +243,34 @@
       color: #fecaca;
       margin-top: 4px;
     }
+    .risk-high {
+      background: #7f1d1d;
+      color: #fecaca;
+    }
+    .risk-medium {
+      background: #78350f;
+      color: #fef3c7;
+    }
+    .risk-low {
+      background: #064e3b;
+      color: #bbf7d0;
+    }
+    .risk-none {
+      background: #0f172a;
+      color: #9ca3af;
+    }
   </style>
 </head>
 <body>
   <div class="sidebar">
     <h1>Algograss DataShield</h1>
     <small>GDPR schema &amp; PII scanner</small>
+
+    <div class="api-key-box">
+      <label for="apiKeyInput">API key (optional, for protected mode)</label>
+      <input id="apiKeyInput" type="password" placeholder="X-API-Key value"
+             oninput="setApiKey(this.value)" />
+    </div>
 
     <button class="btn btn-secondary" onclick="loadDatasources()">↻ Refresh datasources</button>
 
@@ -239,7 +279,7 @@
     <div class="small-muted">
       <div>1️⃣ Add datasource via curl or /docs</div>
       <div>2️⃣ Click “Scan” to analyse schema</div>
-      <div>3️⃣ View history per datasource</div>
+      <div>3️⃣ View history and export JSON</div>
     </div>
   </div>
 
@@ -271,6 +311,24 @@
             <div class="summary-value" id="summaryRatio">–</div>
           </div>
         </div>
+
+        <h3>Per-table risk (top 5)</h3>
+        <div class="table-container" style="max-height: 120px;">
+          <table class="history-table">
+            <thead>
+              <tr>
+                <th>Table</th>
+                <th>PII cols</th>
+                <th>Ratio</th>
+                <th>Risk</th>
+              </tr>
+            </thead>
+            <tbody id="riskTableBody">
+              <tr><td colspan="4" class="empty-state">Run a scan to see table risk.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
         <div id="summaryError" class="error-text"></div>
       </div>
 
@@ -329,10 +387,11 @@
                 <th>PII cols</th>
                 <th>Total cols</th>
                 <th>Ratio</th>
+                <th>Export</th>
               </tr>
             </thead>
             <tbody id="historyTableBody">
-              <tr><td colspan="5" class="empty-state">Scan at least once to see history.</td></tr>
+              <tr><td colspan="6" class="empty-state">Scan at least once to see history.</td></tr>
             </tbody>
           </table>
         </div>
@@ -343,11 +402,30 @@
   <script>
     let currentDatasourceId = null;
     let isScanning = false;
+    let apiKey = "";
 
     function setGlobalStatus(text, isError = false) {
       const el = document.getElementById("globalStatus");
       el.textContent = text || "";
       el.style.color = isError ? "#fecaca" : "#9ca3af";
+    }
+
+    function setApiKey(value) {
+      apiKey = value.trim();
+      if (apiKey) {
+        setGlobalStatus("Using API key for requests.");
+      } else {
+        setGlobalStatus("No API key set (open mode).");
+      }
+    }
+
+    async function apiFetch(url, options = {}) {
+      const opts = { ...options };
+      opts.headers = opts.headers || {};
+      if (apiKey) {
+        opts.headers["X-API-Key"] = apiKey;
+      }
+      return fetch(url, opts);
     }
 
     async function loadDatasources() {
@@ -356,7 +434,7 @@
       listEl.innerHTML = "";
 
       try {
-        const res = await fetch("/api/datasource/");
+        const res = await apiFetch("/api/datasource/");
         if (!res.ok) throw new Error("HTTP " + res.status);
         const data = await res.json();
 
@@ -422,11 +500,12 @@
       currentDatasourceId = ds.id;
       document.getElementById("currentDsLabel").textContent = `${ds.name} (${ds.id})`;
       document.getElementById("summaryTag").textContent = "scanning...";
+      document.getElementById("summaryTag").className = "tag";
       document.getElementById("summaryError").textContent = "";
       setGlobalStatus(`Scanning ${ds.name}...`);
 
       try {
-        const res = await fetch(`/api/scan/${encodeURIComponent(ds.id)}`);
+        const res = await apiFetch(`/api/scan/${encodeURIComponent(ds.id)}`);
         if (!res.ok) {
           const errData = await res.json().catch(() => ({}));
           const msg = errData.detail || `Scan failed: HTTP ${res.status}`;
@@ -445,30 +524,102 @@
         document.getElementById("summaryError").textContent = err.message;
         setGlobalStatus("Scan failed: " + err.message, true);
         document.getElementById("summaryTag").textContent = "error";
+        document.getElementById("summaryTag").className = "tag risk-high";
       } finally {
         isScanning = false;
       }
     }
 
     function renderSummary(scan) {
+      const totalEl = document.getElementById("summaryTotal");
+      const piiEl = document.getElementById("summaryPii");
+      const ratioEl = document.getElementById("summaryRatio");
+      const tagEl = document.getElementById("summaryTag");
+      const riskBody = document.getElementById("riskTableBody");
+
+      riskBody.innerHTML = "";
+
       if (!scan || !scan.summary) {
-        document.getElementById("summaryTotal").textContent = "–";
-        document.getElementById("summaryPii").textContent = "–";
-        document.getElementById("summaryRatio").textContent = "–";
-        document.getElementById("summaryTag").textContent = "no data";
+        totalEl.textContent = "–";
+        piiEl.textContent = "–";
+        ratioEl.textContent = "–";
+        tagEl.textContent = "no data";
+        tagEl.className = "tag risk-none";
+        riskBody.innerHTML = "<tr><td colspan='4' class='empty-state'>No per-table risk data.</td></tr>";
         return;
       }
 
       const s = scan.summary;
-      document.getElementById("summaryTotal").textContent = s.total_columns;
-      document.getElementById("summaryPii").textContent = s.pii_columns;
-      document.getElementById("summaryRatio").textContent = (s.pii_ratio * 100).toFixed(1) + "%";
+      totalEl.textContent = s.total_columns;
+      piiEl.textContent = s.pii_columns;
+      ratioEl.textContent = (s.pii_ratio * 100).toFixed(1) + "%";
 
-      let tag = "low exposure";
-      if (s.pii_ratio > 0.15) tag = "high exposure";
-      else if (s.pii_ratio > 0.05) tag = "medium exposure";
+      const overall = s.overall_risk || "none";
+      let label = "no data";
+      let cls = "tag risk-none";
 
-      document.getElementById("summaryTag").textContent = tag;
+      if (overall === "high") {
+        label = "High risk";
+        cls = "tag risk-high";
+      } else if (overall === "medium") {
+        label = "Medium risk";
+        cls = "tag risk-medium";
+      } else if (overall === "low") {
+        label = "Low risk";
+        cls = "tag risk-low";
+      } else {
+        label = "No PII risk";
+        cls = "tag risk-none";
+      }
+
+      tagEl.textContent = label;
+      tagEl.className = cls;
+
+      const tableRisks = s.table_risks || {};
+      const entries = Object.entries(tableRisks);
+
+      if (!entries.length) {
+        riskBody.innerHTML = "<tr><td colspan='4' class='empty-state'>No per-table risk data.</td></tr>";
+        return;
+      }
+
+      // Sort by highest PII ratio
+      entries.sort((a, b) => (b[1].pii_ratio || 0) - (a[1].pii_ratio || 0));
+      const top = entries.slice(0, 5);
+
+      top.forEach(([tableName, info]) => {
+        const tr = document.createElement("tr");
+
+        const tdTable = document.createElement("td");
+        tdTable.textContent = tableName;
+
+        const tdPii = document.createElement("td");
+        tdPii.textContent = info.pii_columns;
+
+        const tdRatio = document.createElement("td");
+        tdRatio.textContent = (info.pii_ratio * 100).toFixed(1) + "%";
+
+        const tdRisk = document.createElement("td");
+        tdRisk.textContent = info.risk_level;
+
+        // Colour risk cell
+        if (info.risk_level === "high") {
+          tdRisk.style.color = "#fecaca";
+        } else if (info.risk_level === "medium") {
+          tdRisk.style.color = "#fef3c7";
+        } else if (info.risk_level === "low") {
+          tdRisk.style.color = "#bbf7d0";
+        } else {
+          tdRisk.style.color = "#9ca3af";
+        }
+
+        tr.appendChild(tdTable);
+        tr.appendChild(tdPii);
+        tr.appendChild(tdRatio);
+        tr.appendChild(tdRisk);
+
+        riskBody.appendChild(tr);
+      });
     }
 
     function renderSchema(schema) {
@@ -499,12 +650,7 @@
 
           const tdPii = document.createElement("td");
           tdPii.textContent = col.pii ? "PII" : "";
-
-          if (col.pii) {
-            tdPii.style.color = "#fecaca";
-          } else {
-            tdPii.style.color = "#6b7280";
-          }
+          tdPii.style.color = col.pii ? "#fecaca" : "#6b7280";
 
           tr.appendChild(tdTable);
           tr.appendChild(tdCol);
@@ -573,15 +719,15 @@
     async function loadHistory(dsId) {
       const body = document.getElementById("historyTableBody");
       const tag = document.getElementById("historyTag");
-      body.innerHTML = "<tr><td colspan='5' class='empty-state'>Loading history...</td></tr>";
+      body.innerHTML = "<tr><td colspan='6' class='empty-state'>Loading history...</td></tr>";
 
       try {
-        const res = await fetch(`/api/scan/history/${encodeURIComponent(dsId)}`);
+        const res = await apiFetch(`/api/scan/history/${encodeURIComponent(dsId)}`);
         if (!res.ok) throw new Error("HTTP " + res.status);
         const data = await res.json();
 
         if (!data.length) {
-          body.innerHTML = "<tr><td colspan='5' class='empty-state'>No history for this datasource yet.</td></tr>";
+          body.innerHTML = "<tr><td colspan='6' class='empty-state'>No history for this datasource yet.</td></tr>";
           tag.textContent = "no scans yet";
           return;
         }
@@ -610,11 +756,38 @@
             tdRatio.textContent = "-";
           }
 
+          const tdExport = document.createElement("td");
+          const exportLink = document.createElement("a");
+          exportLink.href = "#";
+          exportLink.textContent = "Download JSON";
+          exportLink.onclick = async (e) => {
+            e.preventDefault();
+            try {
+              const res = await apiFetch(`/api/scan/export/${entry.id}`);
+              if (!res.ok) throw new Error("HTTP " + res.status);
+              const blob = await res.blob();
+              const url = URL.createObjectURL(blob);
+              const a = document.createElement("a");
+              a.href = url;
+              a.download = `scan_${entry.id}.json`;
+              document.body.appendChild(a);
+              a.click();
+              document.body.removeChild(a);
+              URL.revokeObjectURL(url);
+              setGlobalStatus(`Exported scan ${entry.id} as JSON.`);
+            } catch (err) {
+              console.error(err);
+              setGlobalStatus("Export failed: " + err.message, true);
+            }
+          };
+          tdExport.appendChild(exportLink);
+
           tr.appendChild(tdId);
           tr.appendChild(tdTime);
           tr.appendChild(tdPii);
           tr.appendChild(tdTotal);
           tr.appendChild(tdRatio);
+          tr.appendChild(tdExport);
 
           body.appendChild(tr);
         });
@@ -622,13 +795,14 @@
         tag.textContent = `${data.length} scan(s)`;
       } catch (err) {
         console.error(err);
-        body.innerHTML = "<tr><td colspan='5' class='error-text'>Failed to load history.</td></tr>";
+        body.innerHTML = "<tr><td colspan='6' class='error-text'>Failed to load history.</td></tr>";
         tag.textContent = "error";
       }
     }
 
     // On page load
     window.addEventListener("load", () => {
+      setGlobalStatus("No API key set (open mode).");
       loadDatasources();
     });
   </script>
