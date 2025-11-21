@@ -1,0 +1,6500 @@
+[
+  {
+    "id": 1,
+    "datasource_id": "e40fd114-1904-424b-ba86-385ac017506a",
+    "scanned_at": "2025-11-21T15:01:52.088691Z",
+    "summary": {
+      "total_columns": 340,
+      "pii_columns": 21,
+      "pii_ratio": 0.061764705882352944
+    },
+    "schema": {
+      "auth.audit_log_entries": [
+        {
+          "column": "instance_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "payload",
+          "type": "json",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "ip_address",
+          "type": "character varying",
+          "pii": true,
+          "pii_reason": [
+            "ip_address",
+            "postal_address"
+          ]
+        }
+      ],
+      "auth.flow_state": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "auth_code",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "code_challenge_method",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "code_challenge",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "provider_type",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "provider_access_token",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "provider_refresh_token",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "authentication_method",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "auth_code_issued_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.identities": [
+        {
+          "column": "provider_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "identity_data",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "provider",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "last_sign_in_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "email",
+          "type": "text",
+          "pii": true,
+          "pii_reason": [
+            "email"
+          ]
+        },
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.instances": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "uuid",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "raw_base_config",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.mfa_amr_claims": [
+        {
+          "column": "session_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "authentication_method",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.mfa_challenges": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "factor_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "verified_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "ip_address",
+          "type": "inet",
+          "pii": true,
+          "pii_reason": [
+            "ip_address",
+            "postal_address"
+          ]
+        },
+        {
+          "column": "otp_code",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "web_authn_session_data",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.mfa_factors": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "friendly_name",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "factor_type",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "status",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "secret",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "phone",
+          "type": "text",
+          "pii": true,
+          "pii_reason": [
+            "phone"
+          ]
+        },
+        {
+          "column": "last_challenged_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "web_authn_credential",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "web_authn_aaguid",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "last_webauthn_challenge_data",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.oauth_authorizations": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "authorization_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "client_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "redirect_uri",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "scope",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "state",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "resource",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "code_challenge",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "code_challenge_method",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "response_type",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "status",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "authorization_code",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "expires_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "approved_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.oauth_clients": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "client_secret_hash",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "registration_type",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "redirect_uris",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "grant_types",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "client_name",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "client_uri",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "logo_uri",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "deleted_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "client_type",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.oauth_consents": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "client_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "scopes",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "granted_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "revoked_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.one_time_tokens": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "token_type",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "token_hash",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "relates_to",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp without time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp without time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.refresh_tokens": [
+        {
+          "column": "instance_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "id",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "token",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_id",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "revoked",
+          "type": "boolean",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "parent",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "session_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.saml_providers": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "sso_provider_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "entity_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "metadata_xml",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "metadata_url",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "attribute_mapping",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "name_id_format",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.saml_relay_states": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "sso_provider_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "request_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "for_email",
+          "type": "text",
+          "pii": true,
+          "pii_reason": [
+            "email"
+          ]
+        },
+        {
+          "column": "redirect_to",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "flow_state_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.schema_migrations": [
+        {
+          "column": "version",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.sessions": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "factor_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "aal",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "not_after",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "refreshed_at",
+          "type": "timestamp without time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_agent",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "ip",
+          "type": "inet",
+          "pii": true,
+          "pii_reason": [
+            "ip_address"
+          ]
+        },
+        {
+          "column": "tag",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "oauth_client_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "refresh_token_hmac_key",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "refresh_token_counter",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.sso_domains": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "sso_provider_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "domain",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.sso_providers": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "resource_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "disabled",
+          "type": "boolean",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.users": [
+        {
+          "column": "instance_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "aud",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "role",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "email",
+          "type": "character varying",
+          "pii": true,
+          "pii_reason": [
+            "email"
+          ]
+        },
+        {
+          "column": "encrypted_password",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "email_confirmed_at",
+          "type": "timestamp with time zone",
+          "pii": true,
+          "pii_reason": [
+            "email"
+          ]
+        },
+        {
+          "column": "invited_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "confirmation_token",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "confirmation_sent_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "recovery_token",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "recovery_sent_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "email_change_token_new",
+          "type": "character varying",
+          "pii": true,
+          "pii_reason": [
+            "email"
+          ]
+        },
+        {
+          "column": "email_change",
+          "type": "character varying",
+          "pii": true,
+          "pii_reason": [
+            "email"
+          ]
+        },
+        {
+          "column": "email_change_sent_at",
+          "type": "timestamp with time zone",
+          "pii": true,
+          "pii_reason": [
+            "email"
+          ]
+        },
+        {
+          "column": "last_sign_in_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "raw_app_meta_data",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "raw_user_meta_data",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "is_super_admin",
+          "type": "boolean",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "phone",
+          "type": "text",
+          "pii": true,
+          "pii_reason": [
+            "phone"
+          ]
+        },
+        {
+          "column": "phone_confirmed_at",
+          "type": "timestamp with time zone",
+          "pii": true,
+          "pii_reason": [
+            "phone"
+          ]
+        },
+        {
+          "column": "phone_change",
+          "type": "text",
+          "pii": true,
+          "pii_reason": [
+            "phone"
+          ]
+        },
+        {
+          "column": "phone_change_token",
+          "type": "character varying",
+          "pii": true,
+          "pii_reason": [
+            "phone"
+          ]
+        },
+        {
+          "column": "phone_change_sent_at",
+          "type": "timestamp with time zone",
+          "pii": true,
+          "pii_reason": [
+            "phone"
+          ]
+        },
+        {
+          "column": "confirmed_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "email_change_token_current",
+          "type": "character varying",
+          "pii": true,
+          "pii_reason": [
+            "email"
+          ]
+        },
+        {
+          "column": "email_change_confirm_status",
+          "type": "smallint",
+          "pii": true,
+          "pii_reason": [
+            "email"
+          ]
+        },
+        {
+          "column": "banned_until",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "reauthentication_token",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "reauthentication_sent_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "is_sso_user",
+          "type": "boolean",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "deleted_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "is_anonymous",
+          "type": "boolean",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "extensions.pg_stat_statements": [
+        {
+          "column": "userid",
+          "type": "oid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "dbid",
+          "type": "oid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "toplevel",
+          "type": "boolean",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "queryid",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "query",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "plans",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "total_plan_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "min_plan_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "max_plan_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "mean_plan_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "stddev_plan_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "calls",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "total_exec_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "min_exec_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "max_exec_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "mean_exec_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "stddev_exec_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "rows",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "shared_blks_hit",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "shared_blks_read",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "shared_blks_dirtied",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "shared_blks_written",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "local_blks_hit",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "local_blks_read",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "local_blks_dirtied",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "local_blks_written",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "temp_blks_read",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "temp_blks_written",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "shared_blk_read_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "shared_blk_write_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "local_blk_read_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "local_blk_write_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "temp_blk_read_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "temp_blk_write_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "wal_records",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "wal_fpi",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "wal_bytes",
+          "type": "numeric",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "jit_functions",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "jit_generation_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "jit_inlining_count",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "jit_inlining_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "jit_optimization_count",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "jit_optimization_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "jit_emission_count",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "jit_emission_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "jit_deform_count",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "jit_deform_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "stats_since",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "minmax_stats_since",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "extensions.pg_stat_statements_info": [
+        {
+          "column": "dealloc",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "stats_reset",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "realtime.messages": [
+        {
+          "column": "topic",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "extension",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "payload",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "event",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "private",
+          "type": "boolean",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp without time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "inserted_at",
+          "type": "timestamp without time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "realtime.schema_migrations": [
+        {
+          "column": "version",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "inserted_at",
+          "type": "timestamp without time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "realtime.subscription": [
+        {
+          "column": "id",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "subscription_id",
+          "type": "uuid",
+          "pii": true,
+          "pii_reason": [
+            "ip_address"
+          ]
+        },
+        {
+          "column": "entity",
+          "type": "regclass",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "filters",
+          "type": "ARRAY",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "claims",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "claims_role",
+          "type": "regrole",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp without time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "storage.buckets": [
+        {
+          "column": "id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "name",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "owner",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "public",
+          "type": "boolean",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "avif_autodetection",
+          "type": "boolean",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "file_size_limit",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "allowed_mime_types",
+          "type": "ARRAY",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "owner_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "type",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "storage.buckets_analytics": [
+        {
+          "column": "name",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "type",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "format",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "deleted_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "storage.buckets_vectors": [
+        {
+          "column": "id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "type",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "storage.migrations": [
+        {
+          "column": "id",
+          "type": "integer",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "name",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "hash",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "executed_at",
+          "type": "timestamp without time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "storage.objects": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "bucket_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "name",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "owner",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "last_accessed_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "metadata",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "path_tokens",
+          "type": "ARRAY",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "version",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "owner_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_metadata",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "level",
+          "type": "integer",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "storage.prefixes": [
+        {
+          "column": "bucket_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "name",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "level",
+          "type": "integer",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "storage.s3_multipart_uploads": [
+        {
+          "column": "id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "in_progress_size",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "upload_signature",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "bucket_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "key",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "version",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "owner_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_metadata",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "storage.s3_multipart_uploads_parts": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "upload_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "size",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "part_number",
+          "type": "integer",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "bucket_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "key",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "etag",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "owner_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "version",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "storage.vector_indexes": [
+        {
+          "column": "id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "name",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "bucket_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "data_type",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "dimension",
+          "type": "integer",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "distance_metric",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "metadata_configuration",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "vault.decrypted_secrets": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "name",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "description",
+          "type": "text",
+          "pii": true,
+          "pii_reason": [
+            "ip_address"
+          ]
+        },
+        {
+          "column": "secret",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "decrypted_secret",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "key_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "nonce",
+          "type": "bytea",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "vault.secrets": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "name",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "description",
+          "type": "text",
+          "pii": true,
+          "pii_reason": [
+            "ip_address"
+          ]
+        },
+        {
+          "column": "secret",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "key_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "nonce",
+          "type": "bytea",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "datasource_id": "e40fd114-1904-424b-ba86-385ac017506a",
+    "scanned_at": "2025-11-21T15:09:09.472273Z",
+    "summary": {
+      "total_columns": 340,
+      "pii_columns": 21,
+      "pii_ratio": 0.061764705882352944
+    },
+    "schema": {
+      "auth.audit_log_entries": [
+        {
+          "column": "instance_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "payload",
+          "type": "json",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "ip_address",
+          "type": "character varying",
+          "pii": true,
+          "pii_reason": [
+            "ip_address",
+            "postal_address"
+          ]
+        }
+      ],
+      "auth.flow_state": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "auth_code",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "code_challenge_method",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "code_challenge",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "provider_type",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "provider_access_token",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "provider_refresh_token",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "authentication_method",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "auth_code_issued_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.identities": [
+        {
+          "column": "provider_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "identity_data",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "provider",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "last_sign_in_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "email",
+          "type": "text",
+          "pii": true,
+          "pii_reason": [
+            "email"
+          ]
+        },
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.instances": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "uuid",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "raw_base_config",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.mfa_amr_claims": [
+        {
+          "column": "session_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "authentication_method",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.mfa_challenges": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "factor_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "verified_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "ip_address",
+          "type": "inet",
+          "pii": true,
+          "pii_reason": [
+            "ip_address",
+            "postal_address"
+          ]
+        },
+        {
+          "column": "otp_code",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "web_authn_session_data",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.mfa_factors": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "friendly_name",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "factor_type",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "status",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "secret",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "phone",
+          "type": "text",
+          "pii": true,
+          "pii_reason": [
+            "phone"
+          ]
+        },
+        {
+          "column": "last_challenged_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "web_authn_credential",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "web_authn_aaguid",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "last_webauthn_challenge_data",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.oauth_authorizations": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "authorization_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "client_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "redirect_uri",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "scope",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "state",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "resource",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "code_challenge",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "code_challenge_method",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "response_type",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "status",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "authorization_code",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "expires_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "approved_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.oauth_clients": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "client_secret_hash",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "registration_type",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "redirect_uris",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "grant_types",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "client_name",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "client_uri",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "logo_uri",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "deleted_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "client_type",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.oauth_consents": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "client_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "scopes",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "granted_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "revoked_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.one_time_tokens": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "token_type",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "token_hash",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "relates_to",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp without time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp without time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.refresh_tokens": [
+        {
+          "column": "instance_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "id",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "token",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_id",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "revoked",
+          "type": "boolean",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "parent",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "session_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.saml_providers": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "sso_provider_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "entity_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "metadata_xml",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "metadata_url",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "attribute_mapping",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "name_id_format",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.saml_relay_states": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "sso_provider_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "request_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "for_email",
+          "type": "text",
+          "pii": true,
+          "pii_reason": [
+            "email"
+          ]
+        },
+        {
+          "column": "redirect_to",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "flow_state_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.schema_migrations": [
+        {
+          "column": "version",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.sessions": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "factor_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "aal",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "not_after",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "refreshed_at",
+          "type": "timestamp without time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_agent",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "ip",
+          "type": "inet",
+          "pii": true,
+          "pii_reason": [
+            "ip_address"
+          ]
+        },
+        {
+          "column": "tag",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "oauth_client_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "refresh_token_hmac_key",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "refresh_token_counter",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.sso_domains": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "sso_provider_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "domain",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.sso_providers": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "resource_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "disabled",
+          "type": "boolean",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.users": [
+        {
+          "column": "instance_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "aud",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "role",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "email",
+          "type": "character varying",
+          "pii": true,
+          "pii_reason": [
+            "email"
+          ]
+        },
+        {
+          "column": "encrypted_password",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "email_confirmed_at",
+          "type": "timestamp with time zone",
+          "pii": true,
+          "pii_reason": [
+            "email"
+          ]
+        },
+        {
+          "column": "invited_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "confirmation_token",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "confirmation_sent_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "recovery_token",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "recovery_sent_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "email_change_token_new",
+          "type": "character varying",
+          "pii": true,
+          "pii_reason": [
+            "email"
+          ]
+        },
+        {
+          "column": "email_change",
+          "type": "character varying",
+          "pii": true,
+          "pii_reason": [
+            "email"
+          ]
+        },
+        {
+          "column": "email_change_sent_at",
+          "type": "timestamp with time zone",
+          "pii": true,
+          "pii_reason": [
+            "email"
+          ]
+        },
+        {
+          "column": "last_sign_in_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "raw_app_meta_data",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "raw_user_meta_data",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "is_super_admin",
+          "type": "boolean",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "phone",
+          "type": "text",
+          "pii": true,
+          "pii_reason": [
+            "phone"
+          ]
+        },
+        {
+          "column": "phone_confirmed_at",
+          "type": "timestamp with time zone",
+          "pii": true,
+          "pii_reason": [
+            "phone"
+          ]
+        },
+        {
+          "column": "phone_change",
+          "type": "text",
+          "pii": true,
+          "pii_reason": [
+            "phone"
+          ]
+        },
+        {
+          "column": "phone_change_token",
+          "type": "character varying",
+          "pii": true,
+          "pii_reason": [
+            "phone"
+          ]
+        },
+        {
+          "column": "phone_change_sent_at",
+          "type": "timestamp with time zone",
+          "pii": true,
+          "pii_reason": [
+            "phone"
+          ]
+        },
+        {
+          "column": "confirmed_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "email_change_token_current",
+          "type": "character varying",
+          "pii": true,
+          "pii_reason": [
+            "email"
+          ]
+        },
+        {
+          "column": "email_change_confirm_status",
+          "type": "smallint",
+          "pii": true,
+          "pii_reason": [
+            "email"
+          ]
+        },
+        {
+          "column": "banned_until",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "reauthentication_token",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "reauthentication_sent_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "is_sso_user",
+          "type": "boolean",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "deleted_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "is_anonymous",
+          "type": "boolean",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "extensions.pg_stat_statements": [
+        {
+          "column": "userid",
+          "type": "oid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "dbid",
+          "type": "oid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "toplevel",
+          "type": "boolean",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "queryid",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "query",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "plans",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "total_plan_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "min_plan_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "max_plan_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "mean_plan_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "stddev_plan_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "calls",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "total_exec_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "min_exec_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "max_exec_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "mean_exec_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "stddev_exec_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "rows",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "shared_blks_hit",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "shared_blks_read",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "shared_blks_dirtied",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "shared_blks_written",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "local_blks_hit",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "local_blks_read",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "local_blks_dirtied",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "local_blks_written",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "temp_blks_read",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "temp_blks_written",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "shared_blk_read_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "shared_blk_write_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "local_blk_read_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "local_blk_write_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "temp_blk_read_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "temp_blk_write_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "wal_records",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "wal_fpi",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "wal_bytes",
+          "type": "numeric",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "jit_functions",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "jit_generation_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "jit_inlining_count",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "jit_inlining_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "jit_optimization_count",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "jit_optimization_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "jit_emission_count",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "jit_emission_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "jit_deform_count",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "jit_deform_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "stats_since",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "minmax_stats_since",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "extensions.pg_stat_statements_info": [
+        {
+          "column": "dealloc",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "stats_reset",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "realtime.messages": [
+        {
+          "column": "topic",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "extension",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "payload",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "event",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "private",
+          "type": "boolean",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp without time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "inserted_at",
+          "type": "timestamp without time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "realtime.schema_migrations": [
+        {
+          "column": "version",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "inserted_at",
+          "type": "timestamp without time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "realtime.subscription": [
+        {
+          "column": "id",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "subscription_id",
+          "type": "uuid",
+          "pii": true,
+          "pii_reason": [
+            "ip_address"
+          ]
+        },
+        {
+          "column": "entity",
+          "type": "regclass",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "filters",
+          "type": "ARRAY",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "claims",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "claims_role",
+          "type": "regrole",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp without time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "storage.buckets": [
+        {
+          "column": "id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "name",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "owner",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "public",
+          "type": "boolean",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "avif_autodetection",
+          "type": "boolean",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "file_size_limit",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "allowed_mime_types",
+          "type": "ARRAY",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "owner_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "type",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "storage.buckets_analytics": [
+        {
+          "column": "name",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "type",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "format",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "deleted_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "storage.buckets_vectors": [
+        {
+          "column": "id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "type",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "storage.migrations": [
+        {
+          "column": "id",
+          "type": "integer",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "name",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "hash",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "executed_at",
+          "type": "timestamp without time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "storage.objects": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "bucket_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "name",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "owner",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "last_accessed_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "metadata",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "path_tokens",
+          "type": "ARRAY",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "version",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "owner_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_metadata",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "level",
+          "type": "integer",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "storage.prefixes": [
+        {
+          "column": "bucket_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "name",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "level",
+          "type": "integer",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "storage.s3_multipart_uploads": [
+        {
+          "column": "id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "in_progress_size",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "upload_signature",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "bucket_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "key",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "version",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "owner_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_metadata",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "storage.s3_multipart_uploads_parts": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "upload_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "size",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "part_number",
+          "type": "integer",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "bucket_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "key",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "etag",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "owner_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "version",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "storage.vector_indexes": [
+        {
+          "column": "id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "name",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "bucket_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "data_type",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "dimension",
+          "type": "integer",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "distance_metric",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "metadata_configuration",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "vault.decrypted_secrets": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "name",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "description",
+          "type": "text",
+          "pii": true,
+          "pii_reason": [
+            "ip_address"
+          ]
+        },
+        {
+          "column": "secret",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "decrypted_secret",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "key_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "nonce",
+          "type": "bytea",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "vault.secrets": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "name",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "description",
+          "type": "text",
+          "pii": true,
+          "pii_reason": [
+            "ip_address"
+          ]
+        },
+        {
+          "column": "secret",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "key_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "nonce",
+          "type": "bytea",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "datasource_id": "e40fd114-1904-424b-ba86-385ac017506a",
+    "scanned_at": "2025-11-21T15:10:21.534505Z",
+    "summary": {
+      "total_columns": 340,
+      "pii_columns": 21,
+      "pii_ratio": 0.061764705882352944
+    },
+    "schema": {
+      "auth.audit_log_entries": [
+        {
+          "column": "instance_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "payload",
+          "type": "json",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "ip_address",
+          "type": "character varying",
+          "pii": true,
+          "pii_reason": [
+            "ip_address",
+            "postal_address"
+          ]
+        }
+      ],
+      "auth.flow_state": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "auth_code",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "code_challenge_method",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "code_challenge",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "provider_type",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "provider_access_token",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "provider_refresh_token",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "authentication_method",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "auth_code_issued_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.identities": [
+        {
+          "column": "provider_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "identity_data",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "provider",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "last_sign_in_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "email",
+          "type": "text",
+          "pii": true,
+          "pii_reason": [
+            "email"
+          ]
+        },
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.instances": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "uuid",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "raw_base_config",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.mfa_amr_claims": [
+        {
+          "column": "session_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "authentication_method",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.mfa_challenges": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "factor_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "verified_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "ip_address",
+          "type": "inet",
+          "pii": true,
+          "pii_reason": [
+            "ip_address",
+            "postal_address"
+          ]
+        },
+        {
+          "column": "otp_code",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "web_authn_session_data",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.mfa_factors": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "friendly_name",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "factor_type",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "status",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "secret",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "phone",
+          "type": "text",
+          "pii": true,
+          "pii_reason": [
+            "phone"
+          ]
+        },
+        {
+          "column": "last_challenged_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "web_authn_credential",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "web_authn_aaguid",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "last_webauthn_challenge_data",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.oauth_authorizations": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "authorization_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "client_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "redirect_uri",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "scope",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "state",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "resource",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "code_challenge",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "code_challenge_method",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "response_type",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "status",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "authorization_code",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "expires_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "approved_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.oauth_clients": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "client_secret_hash",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "registration_type",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "redirect_uris",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "grant_types",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "client_name",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "client_uri",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "logo_uri",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "deleted_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "client_type",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.oauth_consents": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "client_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "scopes",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "granted_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "revoked_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.one_time_tokens": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "token_type",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "token_hash",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "relates_to",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp without time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp without time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.refresh_tokens": [
+        {
+          "column": "instance_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "id",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "token",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_id",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "revoked",
+          "type": "boolean",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "parent",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "session_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.saml_providers": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "sso_provider_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "entity_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "metadata_xml",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "metadata_url",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "attribute_mapping",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "name_id_format",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.saml_relay_states": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "sso_provider_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "request_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "for_email",
+          "type": "text",
+          "pii": true,
+          "pii_reason": [
+            "email"
+          ]
+        },
+        {
+          "column": "redirect_to",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "flow_state_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.schema_migrations": [
+        {
+          "column": "version",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.sessions": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "factor_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "aal",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "not_after",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "refreshed_at",
+          "type": "timestamp without time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_agent",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "ip",
+          "type": "inet",
+          "pii": true,
+          "pii_reason": [
+            "ip_address"
+          ]
+        },
+        {
+          "column": "tag",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "oauth_client_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "refresh_token_hmac_key",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "refresh_token_counter",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.sso_domains": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "sso_provider_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "domain",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.sso_providers": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "resource_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "disabled",
+          "type": "boolean",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "auth.users": [
+        {
+          "column": "instance_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "aud",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "role",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "email",
+          "type": "character varying",
+          "pii": true,
+          "pii_reason": [
+            "email"
+          ]
+        },
+        {
+          "column": "encrypted_password",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "email_confirmed_at",
+          "type": "timestamp with time zone",
+          "pii": true,
+          "pii_reason": [
+            "email"
+          ]
+        },
+        {
+          "column": "invited_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "confirmation_token",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "confirmation_sent_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "recovery_token",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "recovery_sent_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "email_change_token_new",
+          "type": "character varying",
+          "pii": true,
+          "pii_reason": [
+            "email"
+          ]
+        },
+        {
+          "column": "email_change",
+          "type": "character varying",
+          "pii": true,
+          "pii_reason": [
+            "email"
+          ]
+        },
+        {
+          "column": "email_change_sent_at",
+          "type": "timestamp with time zone",
+          "pii": true,
+          "pii_reason": [
+            "email"
+          ]
+        },
+        {
+          "column": "last_sign_in_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "raw_app_meta_data",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "raw_user_meta_data",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "is_super_admin",
+          "type": "boolean",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "phone",
+          "type": "text",
+          "pii": true,
+          "pii_reason": [
+            "phone"
+          ]
+        },
+        {
+          "column": "phone_confirmed_at",
+          "type": "timestamp with time zone",
+          "pii": true,
+          "pii_reason": [
+            "phone"
+          ]
+        },
+        {
+          "column": "phone_change",
+          "type": "text",
+          "pii": true,
+          "pii_reason": [
+            "phone"
+          ]
+        },
+        {
+          "column": "phone_change_token",
+          "type": "character varying",
+          "pii": true,
+          "pii_reason": [
+            "phone"
+          ]
+        },
+        {
+          "column": "phone_change_sent_at",
+          "type": "timestamp with time zone",
+          "pii": true,
+          "pii_reason": [
+            "phone"
+          ]
+        },
+        {
+          "column": "confirmed_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "email_change_token_current",
+          "type": "character varying",
+          "pii": true,
+          "pii_reason": [
+            "email"
+          ]
+        },
+        {
+          "column": "email_change_confirm_status",
+          "type": "smallint",
+          "pii": true,
+          "pii_reason": [
+            "email"
+          ]
+        },
+        {
+          "column": "banned_until",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "reauthentication_token",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "reauthentication_sent_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "is_sso_user",
+          "type": "boolean",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "deleted_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "is_anonymous",
+          "type": "boolean",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "extensions.pg_stat_statements": [
+        {
+          "column": "userid",
+          "type": "oid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "dbid",
+          "type": "oid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "toplevel",
+          "type": "boolean",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "queryid",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "query",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "plans",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "total_plan_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "min_plan_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "max_plan_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "mean_plan_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "stddev_plan_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "calls",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "total_exec_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "min_exec_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "max_exec_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "mean_exec_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "stddev_exec_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "rows",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "shared_blks_hit",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "shared_blks_read",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "shared_blks_dirtied",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "shared_blks_written",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "local_blks_hit",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "local_blks_read",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "local_blks_dirtied",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "local_blks_written",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "temp_blks_read",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "temp_blks_written",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "shared_blk_read_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "shared_blk_write_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "local_blk_read_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "local_blk_write_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "temp_blk_read_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "temp_blk_write_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "wal_records",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "wal_fpi",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "wal_bytes",
+          "type": "numeric",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "jit_functions",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "jit_generation_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "jit_inlining_count",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "jit_inlining_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "jit_optimization_count",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "jit_optimization_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "jit_emission_count",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "jit_emission_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "jit_deform_count",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "jit_deform_time",
+          "type": "double precision",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "stats_since",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "minmax_stats_since",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "extensions.pg_stat_statements_info": [
+        {
+          "column": "dealloc",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "stats_reset",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "realtime.messages": [
+        {
+          "column": "topic",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "extension",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "payload",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "event",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "private",
+          "type": "boolean",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp without time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "inserted_at",
+          "type": "timestamp without time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "realtime.schema_migrations": [
+        {
+          "column": "version",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "inserted_at",
+          "type": "timestamp without time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "realtime.subscription": [
+        {
+          "column": "id",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "subscription_id",
+          "type": "uuid",
+          "pii": true,
+          "pii_reason": [
+            "ip_address"
+          ]
+        },
+        {
+          "column": "entity",
+          "type": "regclass",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "filters",
+          "type": "ARRAY",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "claims",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "claims_role",
+          "type": "regrole",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp without time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "storage.buckets": [
+        {
+          "column": "id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "name",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "owner",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "public",
+          "type": "boolean",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "avif_autodetection",
+          "type": "boolean",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "file_size_limit",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "allowed_mime_types",
+          "type": "ARRAY",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "owner_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "type",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "storage.buckets_analytics": [
+        {
+          "column": "name",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "type",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "format",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "deleted_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "storage.buckets_vectors": [
+        {
+          "column": "id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "type",
+          "type": "USER-DEFINED",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "storage.migrations": [
+        {
+          "column": "id",
+          "type": "integer",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "name",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "hash",
+          "type": "character varying",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "executed_at",
+          "type": "timestamp without time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "storage.objects": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "bucket_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "name",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "owner",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "last_accessed_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "metadata",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "path_tokens",
+          "type": "ARRAY",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "version",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "owner_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_metadata",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "level",
+          "type": "integer",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "storage.prefixes": [
+        {
+          "column": "bucket_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "name",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "level",
+          "type": "integer",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "storage.s3_multipart_uploads": [
+        {
+          "column": "id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "in_progress_size",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "upload_signature",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "bucket_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "key",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "version",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "owner_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "user_metadata",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "storage.s3_multipart_uploads_parts": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "upload_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "size",
+          "type": "bigint",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "part_number",
+          "type": "integer",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "bucket_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "key",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "etag",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "owner_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "version",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "storage.vector_indexes": [
+        {
+          "column": "id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "name",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "bucket_id",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "data_type",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "dimension",
+          "type": "integer",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "distance_metric",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "metadata_configuration",
+          "type": "jsonb",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "vault.decrypted_secrets": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "name",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "description",
+          "type": "text",
+          "pii": true,
+          "pii_reason": [
+            "ip_address"
+          ]
+        },
+        {
+          "column": "secret",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "decrypted_secret",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "key_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "nonce",
+          "type": "bytea",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ],
+      "vault.secrets": [
+        {
+          "column": "id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "name",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "description",
+          "type": "text",
+          "pii": true,
+          "pii_reason": [
+            "ip_address"
+          ]
+        },
+        {
+          "column": "secret",
+          "type": "text",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "key_id",
+          "type": "uuid",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "nonce",
+          "type": "bytea",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "created_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        },
+        {
+          "column": "updated_at",
+          "type": "timestamp with time zone",
+          "pii": false,
+          "pii_reason": []
+        }
+      ]
+    }
+  }
+]

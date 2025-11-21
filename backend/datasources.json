@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Supabase Pooler DB",
+    "type": "postgres",
+    "config": {
+      "host": "aws-1-eu-west-1.pooler.supabase.com",
+      "port": 5432,
+      "database": "postgres",
+      "user": "postgres.cszlhisuoxbxmuedfqxs",
+      "password": "NewCreation@12345"
+    },
+    "id": "e40fd114-1904-424b-ba86-385ac017506a"
+  }
+]

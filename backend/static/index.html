@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Algograss DataShield - Scanner UI</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    body {
+      margin: 0;
+      background: #0f172a;
+      color: #e5e7eb;
+      display: flex;
+      height: 100vh;
+    }
+    .sidebar {
+      width: 280px;
+      border-right: 1px solid #1f2937;
+      padding: 16px;
+      background: #020617;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar h1 {
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+    .sidebar small {
+      color: #9ca3af;
+      margin-bottom: 16px;
+    }
+    .btn {
+      border: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 13px;
+      cursor: pointer;
+      margin-right: 4px;
+    }
+    .btn-primary {
+      background: #2563eb;
+      color: white;
+    }
+    .btn-secondary {
+      background: #1f2937;
+      color: #e5e7eb;
+    }
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+    .ds-list {
+      margin-top: 8px;
+      padding: 0;
+      list-style: none;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .ds-item {
+      border-radius: 8px;
+      padding: 8px;
+      margin-bottom: 8px;
+      background: #020617;
+      border: 1px solid #111827;
+    }
+    .ds-name {
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .ds-id {
+      font-size: 10px;
+      color: #6b7280;
+      word-break: break-all;
+      margin-top: 2px;
+      margin-bottom: 4px;
+    }
+    .ds-type {
+      font-size: 11px;
+      color: #9ca3af;
+    }
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 16px;
+      overflow: hidden;
+    }
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .status {
+      font-size: 12px;
+      color: #9ca3af;
+    }
+    .status span {
+      font-weight: 600;
+    }
+    .panels {
+      display: grid;
+      grid-template-columns: 1.1fr 1.4fr;
+      grid-template-rows: 180px auto;
+      gap: 12px;
+      flex: 1;
+      min-height: 0;
+    }
+    .card {
+      background: #020617;
+      border-radius: 12px;
+      border: 1px solid #1f2937;
+      padding: 10px 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+    .card h2 {
+      font-size: 14px;
+      margin: 0 0 4px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .card h3 {
+      font-size: 13px;
+      margin: 8px 0 2px 0;
+    }
+    .tag {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 11px;
+      background: #0f172a;
+      color: #9ca3af;
+      margin-left: 4px;
+    }
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .summary-item {
+      background: #020617;
+      border-radius: 8px;
+      border: 1px solid #111827;
+      padding: 6px 8px;
+      font-size: 12px;
+    }
+    .summary-label {
+      color: #9ca3af;
+      font-size: 11px;
+      margin-bottom: 2px;
+    }
+    .summary-value {
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .pii-table,
+    .schema-table,
+    .history-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+    }
+    .pii-table th,
+    .pii-table td,
+    .schema-table th,
+    .schema-table td,
+    .history-table th,
+    .history-table td {
+      border-bottom: 1px solid #111827;
+      padding: 4px 6px;
+      text-align: left;
+    }
+    .pii-pill {
+      display: inline-block;
+      border-radius: 999px;
+      font-size: 10px;
+      padding: 2px 6px;
+      background: #7f1d1d;
+      color: #fecaca;
+    }
+    .pii-reason {
+      font-size: 10px;
+      color: #9ca3af;
+    }
+    .table-container {
+      overflow: auto;
+      flex: 1;
+      margin-top: 4px;
+      border-radius: 8px;
+      border: 1px solid #111827;
+      background: radial-gradient(circle at top left, rgba(37,99,235,0.12), transparent),
+                  radial-gradient(circle at bottom right, rgba(14,165,233,0.08), transparent);
+    }
+    .history-pill {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 10px;
+      background: #0f172a;
+      color: #a855f7;
+    }
+    .small-muted {
+      font-size: 11px;
+      color: #6b7280;
+    }
+    .empty-state {
+      font-size: 12px;
+      color: #6b7280;
+      padding-top: 6px;
+    }
+    .loading {
+      font-size: 12px;
+      color: #fde68a;
+      margin-left: 8px;
+    }
+    .error-text {
+      font-size: 12px;
+      color: #fecaca;
+      margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h1>Algograss DataShield</h1>
+    <small>GDPR schema &amp; PII scanner</small>
+
+    <button class="btn btn-secondary" onclick="loadDatasources()">↻ Refresh datasources</button>
+
+    <ul id="dsList" class="ds-list"></ul>
+
+    <div class="small-muted">
+      <div>1️⃣ Add datasource via curl or /docs</div>
+      <div>2️⃣ Click “Scan” to analyse schema</div>
+      <div>3️⃣ View history per datasource</div>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="top-bar">
+      <div class="status">
+        Selected datasource: <span id="currentDsLabel">none</span>
+      </div>
+      <div id="globalStatus" class="status"></div>
+    </div>
+
+    <div class="panels">
+      <div class="card">
+        <h2>
+          Scan summary
+          <span id="summaryTag" class="tag">no scan yet</span>
+        </h2>
+        <div class="summary-grid" id="summaryGrid">
+          <div class="summary-item">
+            <div class="summary-label">Total columns</div>
+            <div class="summary-value" id="summaryTotal">–</div>
+          </div>
+          <div class="summary-item">
+            <div class="summary-label">PII columns</div>
+            <div class="summary-value" id="summaryPii">–</div>
+          </div>
+          <div class="summary-item">
+            <div class="summary-label">PII ratio</div>
+            <div class="summary-value" id="summaryRatio">–</div>
+          </div>
+        </div>
+        <div id="summaryError" class="error-text"></div>
+      </div>
+
+      <div class="card">
+        <h2>
+          PII fields
+          <span class="tag" id="piiTag">0 columns flagged</span>
+        </h2>
+        <div class="table-container">
+          <table class="pii-table" id="piiTable">
+            <thead>
+              <tr>
+                <th>Table</th>
+                <th>Column</th>
+                <th>Type</th>
+                <th>Reason</th>
+              </tr>
+            </thead>
+            <tbody id="piiTableBody">
+              <tr><td colspan="4" class="empty-state">Run a scan to see PII columns.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Schema explorer <span class="tag" id="schemaTag">0 tables</span></h2>
+        <div class="table-container">
+          <table class="schema-table">
+            <thead>
+              <tr>
+                <th>Table</th>
+                <th>Column</th>
+                <th>Type</th>
+                <th>PII?</th>
+              </tr>
+            </thead>
+            <tbody id="schemaTableBody">
+              <tr><td colspan="4" class="empty-state">Run a scan to see schema.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>
+          Scan history
+          <span class="tag" id="historyTag">no scans yet</span>
+        </h2>
+        <div class="table-container">
+          <table class="history-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>When (UTC)</th>
+                <th>PII cols</th>
+                <th>Total cols</th>
+                <th>Ratio</th>
+              </tr>
+            </thead>
+            <tbody id="historyTableBody">
+              <tr><td colspan="5" class="empty-state">Scan at least once to see history.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentDatasourceId = null;
+    let isScanning = false;
+
+    function setGlobalStatus(text, isError = false) {
+      const el = document.getElementById("globalStatus");
+      el.textContent = text || "";
+      el.style.color = isError ? "#fecaca" : "#9ca3af";
+    }
+
+    async function loadDatasources() {
+      setGlobalStatus("Loading datasources...");
+      const listEl = document.getElementById("dsList");
+      listEl.innerHTML = "";
+
+      try {
+        const res = await fetch("/api/datasource/");
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const data = await res.json();
+
+        if (!data.length) {
+          listEl.innerHTML = "<li class='small-muted'>No datasources yet. Create one via curl or /docs.</li>";
+          setGlobalStatus("No datasources found.");
+          return;
+        }
+
+        data.forEach(ds => {
+          const li = document.createElement("li");
+          li.className = "ds-item";
+
+          const nameEl = document.createElement("div");
+          nameEl.className = "ds-name";
+          nameEl.textContent = ds.name;
+
+          const idEl = document.createElement("div");
+          idEl.className = "ds-id";
+          idEl.textContent = ds.id;
+
+          const typeEl = document.createElement("div");
+          typeEl.className = "ds-type";
+          typeEl.textContent = `Type: ${ds.type}`;
+
+          const btnRow = document.createElement("div");
+          btnRow.style.marginTop = "6px";
+
+          const scanBtn = document.createElement("button");
+          scanBtn.className = "btn btn-primary";
+          scanBtn.textContent = "Scan";
+          scanBtn.onclick = () => scanDatasource(ds);
+
+          const histBtn = document.createElement("button");
+          histBtn.className = "btn btn-secondary";
+          histBtn.textContent = "History";
+          histBtn.onclick = () => loadHistory(ds.id);
+
+          btnRow.appendChild(scanBtn);
+          btnRow.appendChild(histBtn);
+
+          li.appendChild(nameEl);
+          li.appendChild(idEl);
+          li.appendChild(typeEl);
+          li.appendChild(btnRow);
+
+          listEl.appendChild(li);
+        });
+
+        setGlobalStatus(`Loaded ${data.length} datasource(s).`);
+      } catch (err) {
+        console.error(err);
+        setGlobalStatus("Failed to load datasources.", true);
+        const listEl = document.getElementById("dsList");
+        listEl.innerHTML = "<li class='error-text'>Error loading datasources. Check backend.</li>";
+      }
+    }
+
+    async function scanDatasource(ds) {
+      if (isScanning) return;
+      isScanning = true;
+
+      currentDatasourceId = ds.id;
+      document.getElementById("currentDsLabel").textContent = `${ds.name} (${ds.id})`;
+      document.getElementById("summaryTag").textContent = "scanning...";
+      document.getElementById("summaryError").textContent = "";
+      setGlobalStatus(`Scanning ${ds.name}...`);
+
+      try {
+        const res = await fetch(`/api/scan/${encodeURIComponent(ds.id)}`);
+        if (!res.ok) {
+          const errData = await res.json().catch(() => ({}));
+          const msg = errData.detail || `Scan failed: HTTP ${res.status}`;
+          throw new Error(msg);
+        }
+
+        const data = await res.json();
+        renderSummary(data);
+        renderSchema(data.schema);
+        renderPii(data.schema);
+        await loadHistory(ds.id);
+
+        setGlobalStatus(`Scan completed for ${ds.name}.`);
+      } catch (err) {
+        console.error(err);
+        document.getElementById("summaryError").textContent = err.message;
+        setGlobalStatus("Scan failed: " + err.message, true);
+        document.getElementById("summaryTag").textContent = "error";
+      } finally {
+        isScanning = false;
+      }
+    }
+
+    function renderSummary(scan) {
+      if (!scan || !scan.summary) {
+        document.getElementById("summaryTotal").textContent = "–";
+        document.getElementById("summaryPii").textContent = "–";
+        document.getElementById("summaryRatio").textContent = "–";
+        document.getElementById("summaryTag").textContent = "no data";
+        return;
+      }
+
+      const s = scan.summary;
+      document.getElementById("summaryTotal").textContent = s.total_columns;
+      document.getElementById("summaryPii").textContent = s.pii_columns;
+      document.getElementById("summaryRatio").textContent = (s.pii_ratio * 100).toFixed(1) + "%";
+
+      let tag = "low exposure";
+      if (s.pii_ratio > 0.15) tag = "high exposure";
+      else if (s.pii_ratio > 0.05) tag = "medium exposure";
+
+      document.getElementById("summaryTag").textContent = tag;
+    }
+
+    function renderSchema(schema) {
+      const body = document.getElementById("schemaTableBody");
+      const tag = document.getElementById("schemaTag");
+      body.innerHTML = "";
+
+      if (!schema || Object.keys(schema).length === 0) {
+        body.innerHTML = "<tr><td colspan='4' class='empty-state'>No columns found.</td></tr>";
+        tag.textContent = "0 tables";
+        return;
+      }
+
+      let tableCount = 0;
+      for (const [tableName, cols] of Object.entries(schema)) {
+        tableCount++;
+        cols.forEach(col => {
+          const tr = document.createElement("tr");
+
+          const tdTable = document.createElement("td");
+          tdTable.textContent = tableName;
+
+          const tdCol = document.createElement("td");
+          tdCol.textContent = col.column;
+
+          const tdType = document.createElement("td");
+          tdType.textContent = col.type;
+
+          const tdPii = document.createElement("td");
+          tdPii.textContent = col.pii ? "PII" : "";
+
+          if (col.pii) {
+            tdPii.style.color = "#fecaca";
+          } else {
+            tdPii.style.color = "#6b7280";
+          }
+
+          tr.appendChild(tdTable);
+          tr.appendChild(tdCol);
+          tr.appendChild(tdType);
+          tr.appendChild(tdPii);
+
+          body.appendChild(tr);
+        });
+      }
+
+      tag.textContent = `${tableCount} tables`;
+    }
+
+    function renderPii(schema) {
+      const body = document.getElementById("piiTableBody");
+      const tag = document.getElementById("piiTag");
+      body.innerHTML = "";
+
+      if (!schema || Object.keys(schema).length === 0) {
+        body.innerHTML = "<tr><td colspan='4' class='empty-state'>No columns found.</td></tr>";
+        tag.textContent = "0 columns flagged";
+        return;
+      }
+
+      const rows = [];
+      for (const [tableName, cols] of Object.entries(schema)) {
+        cols.forEach(col => {
+          if (col.pii) {
+            rows.push({ tableName, col });
+          }
+        });
+      }
+
+      if (!rows.length) {
+        body.innerHTML = "<tr><td colspan='4' class='empty-state'>No columns flagged as PII.</td></tr>";
+        tag.textContent = "0 columns flagged";
+        return;
+      }
+
+      rows.forEach(({ tableName, col }) => {
+        const tr = document.createElement("tr");
+
+        const tdTable = document.createElement("td");
+        tdTable.textContent = tableName;
+
+        const tdCol = document.createElement("td");
+        tdCol.innerHTML = `<span class="pii-pill">${col.column}</span>`;
+
+        const tdType = document.createElement("td");
+        tdType.textContent = col.type;
+
+        const tdReason = document.createElement("td");
+        tdReason.textContent = (col.pii_reason || []).join(", ");
+
+        tr.appendChild(tdTable);
+        tr.appendChild(tdCol);
+        tr.appendChild(tdType);
+        tr.appendChild(tdReason);
+
+        body.appendChild(tr);
+      });
+
+      tag.textContent = `${rows.length} columns flagged`;
+    }
+
+    async function loadHistory(dsId) {
+      const body = document.getElementById("historyTableBody");
+      const tag = document.getElementById("historyTag");
+      body.innerHTML = "<tr><td colspan='5' class='empty-state'>Loading history...</td></tr>";
+
+      try {
+        const res = await fetch(`/api/scan/history/${encodeURIComponent(dsId)}`);
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const data = await res.json();
+
+        if (!data.length) {
+          body.innerHTML = "<tr><td colspan='5' class='empty-state'>No history for this datasource yet.</td></tr>";
+          tag.textContent = "no scans yet";
+          return;
+        }
+
+        body.innerHTML = "";
+        data.forEach(entry => {
+          const tr = document.createElement("tr");
+
+          const tdId = document.createElement("td");
+          tdId.textContent = entry.id;
+
+          const tdTime = document.createElement("td");
+          tdTime.textContent = entry.scanned_at;
+
+          const s = entry.summary || {};
+          const tdPii = document.createElement("td");
+          tdPii.textContent = s.pii_columns ?? "-";
+
+          const tdTotal = document.createElement("td");
+          tdTotal.textContent = s.total_columns ?? "-";
+
+          const tdRatio = document.createElement("td");
+          if (typeof s.pii_ratio === "number") {
+            tdRatio.textContent = (s.pii_ratio * 100).toFixed(1) + "%";
+          } else {
+            tdRatio.textContent = "-";
+          }
+
+          tr.appendChild(tdId);
+          tr.appendChild(tdTime);
+          tr.appendChild(tdPii);
+          tr.appendChild(tdTotal);
+          tr.appendChild(tdRatio);
+
+          body.appendChild(tr);
+        });
+
+        tag.textContent = `${data.length} scan(s)`;
+      } catch (err) {
+        console.error(err);
+        body.innerHTML = "<tr><td colspan='5' class='error-text'>Failed to load history.</td></tr>";
+        tag.textContent = "error";
+      }
+    }
+
+    // On page load
+    window.addEventListener("load", () => {
+      loadDatasources();
+    });
+  </script>
+</body>
+</html>
