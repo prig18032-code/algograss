@@ -1,75 +1,66 @@
-# F:\algograss\backend\datasource_api.py
-from fastapi import APIRouter, HTTPException, Depends, Header
+from fastapi import APIRouter, HTTPException, Header
 from pydantic import BaseModel
-import uuid
 import json
 import os
+import uuid
 
-DB_FILE = "datasources.json"
+router = APIRouter()
+
+DATA_FILE = "datasources.json"
+API_KEY = os.environ.get("API_KEY", "changeme")
 
 
-def read_db():
-    if not os.path.exists(DB_FILE):
+class DataSourceIn(BaseModel):
+    name: str
+    type: str
+    config: dict
+
+
+def load_data():
+    if not os.path.exists(DATA_FILE):
         return []
-    with open(DB_FILE, "r", encoding="utf-8") as f:
-        try:
-            return json.load(f)
-        except json.JSONDecodeError:
-            return []
+    with open(DATA_FILE, "r") as f:
+        return json.load(f)
 
 
-def write_db(data):
-    with open(DB_FILE, "w", encoding="utf-8") as f:
-        json.dump(data, f, indent=2, ensure_ascii=False)
+def save_data(data):
+    with open(DATA_FILE, "w") as f:
+        json.dump(data, f, indent=2)
 
 
-def verify_api_key(x_api_key: str | None = Header(default=None)):
-    """
-    Optional API key auth.
-    If environment variable ALGOGRASS_API_KEY is set,
-    all requests must include header: X-API-Key: <that value>.
-    If the env var is NOT set, auth is effectively disabled.
-    """
-    expected = os.getenv("ALGOGRASS_API_KEY")
-    if not expected:
-        # Auth disabled
-        return
-    if x_api_key != expected:
+def require_key(x_api_key: str = Header(None)):
+    if x_api_key != API_KEY:
         raise HTTPException(status_code=401, detail="Invalid or missing API key")
 
 
-class DatasourceIn(BaseModel):
-    name: str
-    type: str  # e.g., "postgres"
-    config: dict = {}
+@router.get("/")
+def list_datasources(x_api_key: str = Header(None)):
+    require_key(x_api_key)
+    return load_data()
 
 
-class DatasourceOut(DatasourceIn):
-    id: str
+@router.post("/")
+def create_datasource(ds: DataSourceIn, x_api_key: str = Header(None)):
+    require_key(x_api_key)
+    data = load_data()
+
+    new_ds = {
+        "id": str(uuid.uuid4()),
+        "name": ds.name,
+        "type": ds.type,
+        "config": ds.config
+    }
+
+    data.append(new_ds)
+    save_data(data)
+    return new_ds
 
 
-router = APIRouter(dependencies=[Depends(verify_api_key)])
-
-
-@router.post("/", response_model=DatasourceOut)
-def create_datasource(ds: DatasourceIn):
-    data = read_db()
-    ds_obj = ds.dict()
-    ds_obj["id"] = str(uuid.uuid4())
-    data.append(ds_obj)
-    write_db(data)
-    return ds_obj
-
-
-@router.get("/", response_model=list[DatasourceOut])
-def list_datasources():
-    return read_db()
-
-
-@router.get("/{ds_id}", response_model=DatasourceOut)
-def get_datasource(ds_id: str):
-    data = read_db()
-    for d in data:
-        if d["id"] == ds_id:
-            return d
+@router.get("/{ds_id}")
+def get_datasource(ds_id: str, x_api_key: str = Header(None)):
+    require_key(x_api_key)
+    data = load_data()
+    for ds in data:
+        if ds["id"] == ds_id:
+            return ds
     raise HTTPException(status_code=404, detail="Datasource not found")
