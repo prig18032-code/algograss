@@ -1,809 +1,877 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Algograss DataShield - Scanner UI</title>
+  <meta charset="UTF-8" />
+  <title>Algograss – DataShield UI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
+    :root {
+      --bg: #050816;
+      --bg-alt: #0b1120;
+      --card: #020617;
+      --accent: #3b82f6;
+      --accent-soft: rgba(59,130,246,0.2);
+      --accent-strong: rgba(59,130,246,0.4);
+      --danger: #ef4444;
+      --success: #22c55e;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --border: #1f2937;
+      --radius-lg: 18px;
+    }
+
     * {
       box-sizing: border-box;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
+
     body {
       margin: 0;
-      background: #0f172a;
-      color: #e5e7eb;
-      display: flex;
-      height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: radial-gradient(circle at top, #1d2b64 0, #050816 45%, #000 100%);
+      color: var(--text);
+      min-height: 100vh;
     }
-    .sidebar {
-      width: 280px;
-      border-right: 1px solid #1f2937;
-      padding: 16px;
-      background: #020617;
-      display: flex;
-      flex-direction: column;
+
+    .app-shell {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 16px 40px;
     }
-    .sidebar h1 {
-      font-size: 18px;
-      margin-bottom: 4px;
-    }
-    .sidebar small {
-      color: #9ca3af;
-      margin-bottom: 12px;
-    }
-    .api-key-box {
-      margin-bottom: 10px;
-    }
-    .api-key-box label {
-      display: block;
-      font-size: 11px;
-      color: #9ca3af;
-      margin-bottom: 4px;
-    }
-    .api-key-box input {
-      width: 100%;
-      padding: 6px 8px;
-      border-radius: 6px;
-      border: 1px solid #1f2937;
-      background: #020617;
-      color: #e5e7eb;
-      font-size: 12px;
-    }
-    .btn {
-      border: none;
-      padding: 6px 10px;
-      border-radius: 6px;
-      font-size: 13px;
-      cursor: pointer;
-      margin-right: 4px;
-    }
-    .btn-primary {
-      background: #2563eb;
-      color: white;
-    }
-    .btn-secondary {
-      background: #1f2937;
-      color: #e5e7eb;
-    }
-    .btn:disabled {
-      opacity: 0.5;
-      cursor: default;
-    }
-    .ds-list {
-      margin-top: 8px;
-      padding: 0;
-      list-style: none;
-      overflow-y: auto;
-      flex: 1;
-    }
-    .ds-item {
-      border-radius: 8px;
-      padding: 8px;
-      margin-bottom: 8px;
-      background: #020617;
-      border: 1px solid #111827;
-    }
-    .ds-name {
-      font-size: 14px;
-      font-weight: 600;
-    }
-    .ds-id {
-      font-size: 10px;
-      color: #6b7280;
-      word-break: break-all;
-      margin-top: 2px;
-      margin-bottom: 4px;
-    }
-    .ds-type {
-      font-size: 11px;
-      color: #9ca3af;
-    }
-    .main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      padding: 16px;
-      overflow: hidden;
-    }
-    .top-bar {
+
+    header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: 18px;
+      gap: 16px;
     }
-    .status {
-      font-size: 12px;
-      color: #9ca3af;
+
+    .title-block h1 {
+      margin: 0;
+      font-size: 26px;
+      letter-spacing: 0.04em;
     }
-    .status span {
-      font-weight: 600;
-    }
-    .panels {
-      display: grid;
-      grid-template-columns: 1.1fr 1.4fr;
-      grid-template-rows: 220px auto;
-      gap: 12px;
-      flex: 1;
-      min-height: 0;
-    }
-    .card {
-      background: #020617;
-      border-radius: 12px;
-      border: 1px solid #1f2937;
-      padding: 10px 12px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      min-height: 0;
-    }
-    .card h2 {
-      font-size: 14px;
-      margin: 0 0 4px 0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .card h3 {
+
+    .title-block p {
+      margin: 4px 0 0;
       font-size: 13px;
-      margin: 8px 0 4px 0;
+      color: var(--muted);
     }
-    .tag {
-      display: inline-block;
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(15, 23, 42, 0.9);
       border-radius: 999px;
-      padding: 2px 8px;
+      padding: 6px 12px;
       font-size: 11px;
-      background: #0f172a;
-      color: #9ca3af;
-      margin-left: 4px;
+      border: 1px solid rgba(148, 163, 184, 0.15);
     }
+
+    .pill span.key {
+      font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
+      color: #a5b4fc;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 900px) {
+      main {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .card {
+      background: linear-gradient(145deg, #020617, #020617);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(148, 163, 184, 0.22);
+      box-shadow: 0 24px 60px rgba(15, 23, 42, 0.75);
+      padding: 16px 16px 14px;
+      backdrop-filter: blur(18px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      opacity: 0.07;
+      background:
+        radial-gradient(circle at 10% 0, rgba(56, 189, 248, 0.4), transparent 55%),
+        radial-gradient(circle at 90% 0, rgba(244, 63, 94, 0.35), transparent 55%);
+      pointer-events: none;
+    }
+
+    .card-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      gap: 8px;
+    }
+
+    .card-header h2 {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    .card-header p {
+      margin: 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid rgba(31, 41, 55, 0.9);
+      margin: 10px -16px 12px;
+    }
+
+    .btn {
+      border-radius: 999px;
+      border: 1px solid transparent;
+      padding: 7px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(135deg, var(--accent), #6366f1);
+      color: white;
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.6);
+      transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.14s ease;
+      white-space: nowrap;
+    }
+
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: default;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .btn:hover:not(:disabled) {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 32px rgba(37, 99, 235, 0.9);
+    }
+
+    .btn-secondary {
+      background: rgba(15, 23, 42, 0.9);
+      border-color: rgba(148, 163, 184, 0.5);
+      color: var(--text);
+      box-shadow: none;
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      background: rgba(15, 23, 42, 1);
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.7);
+    }
+
+    .btn-sm {
+      padding: 5px 11px;
+      font-size: 11px;
+      box-shadow: none;
+    }
+
+    .btn-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+    }
+
+    .status-pill {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      color: var(--muted);
+    }
+
+    .status-pill.ok {
+      border-color: rgba(34, 197, 94, 0.5);
+      color: #bbf7d0;
+      background: rgba(22, 163, 74, 0.16);
+    }
+
+    .status-pill.err {
+      border-color: rgba(248, 113, 113, 0.7);
+      color: #fecaca;
+      background: rgba(127, 29, 29, 0.35);
+    }
+
+    .list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      max-height: 420px;
+      overflow-y: auto;
+    }
+
+    .list-item {
+      border-radius: 14px;
+      padding: 10px 11px;
+      margin-bottom: 8px;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      background: radial-gradient(circle at top left, rgba(30,64,175,0.55), #020617);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .list-item-main {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .ds-name {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .ds-meta {
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .ds-meta span.code {
+      font-family: ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono",
+        "Courier New", monospace;
+      background: rgba(15, 23, 42, 0.9);
+      padding: 2px 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      font-size: 10px;
+    }
+
+    .tag {
+      padding: 1px 7px;
+      border-radius: 999px;
+      font-size: 10px;
+      background: rgba(31, 41, 55, 0.9);
+      border: 1px solid rgba(55, 65, 81, 0.9);
+    }
+
+    .tag-risk-low {
+      color: #bbf7d0;
+      border-color: rgba(34, 197, 94, 0.7);
+      background: rgba(22, 163, 74, 0.23);
+    }
+
+    .tag-risk-medium {
+      color: #facc15;
+      border-color: rgba(234, 179, 8, 0.8);
+      background: rgba(202, 138, 4, 0.25);
+    }
+
+    .tag-risk-high {
+      color: #fecaca;
+      border-color: rgba(248, 113, 113, 0.85);
+      background: rgba(127, 29, 29, 0.5);
+    }
+
+    .scan-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .scan-meta {
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .scan-meta span.value {
+      color: #e5e7eb;
+    }
+
+    .scan-status {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .scan-status strong {
+      color: #e5e7eb;
+    }
+
+    .scan-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.2fr);
+      gap: 12px;
+    }
+
+    @media (max-width: 900px) {
+      .scan-body {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .summary-card,
+    .table-card {
+      border-radius: 14px;
+      padding: 10px 11px;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      background: radial-gradient(circle at top left, rgba(59,130,246,0.45), #020617);
+    }
+
     .summary-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 8px;
-      margin-top: 4px;
+      margin-top: 8px;
     }
-    .summary-item {
-      background: #020617;
-      border-radius: 8px;
-      border: 1px solid #111827;
-      padding: 6px 8px;
-      font-size: 12px;
+
+    @media (max-width: 600px) {
+      .summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
-    .summary-label {
-      color: #9ca3af;
+
+    .stat {
+      border-radius: 12px;
+      padding: 7px 8px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .stat-label {
       font-size: 11px;
-      margin-bottom: 2px;
+      color: var(--muted);
     }
-    .summary-value {
-      font-size: 13px;
+
+    .stat-value {
+      font-size: 15px;
       font-weight: 600;
     }
-    .pii-table,
-    .schema-table,
-    .history-table {
-      width: 100%;
-      border-collapse: collapse;
+
+    .stat-sub {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .tables-list {
+      max-height: 240px;
+      overflow-y: auto;
+      margin-top: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .table-item {
+      border-radius: 11px;
+      padding: 6px 7px 7px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(31, 41, 55, 0.9);
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
       font-size: 11px;
     }
-    .pii-table th,
-    .pii-table td,
-    .schema-table th,
-    .schema-table td,
-    .history-table th,
-    .history-table td {
-      border-bottom: 1px solid #111827;
-      padding: 4px 6px;
-      text-align: left;
+
+    .table-item-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 6px;
+      align-items: center;
     }
-    .pii-pill {
-      display: inline-block;
-      border-radius: 999px;
-      font-size: 10px;
-      padding: 2px 6px;
-      background: #7f1d1d;
+
+    .table-name {
+      font-weight: 500;
+      font-size: 12px;
+    }
+
+    .table-meta {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      color: var(--muted);
+    }
+
+    .scan-empty {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .scan-error {
+      font-size: 12px;
       color: #fecaca;
+      background: rgba(127, 29, 29, 0.6);
+      border-radius: 10px;
+      padding: 7px 9px;
+      border: 1px solid rgba(248, 113, 113, 0.9);
+      margin-top: 8px;
+      white-space: pre-wrap;
     }
-    .pii-reason {
-      font-size: 10px;
-      color: #9ca3af;
-    }
-    .table-container {
-      overflow: auto;
-      flex: 1;
-      margin-top: 4px;
-      border-radius: 8px;
-      border: 1px solid #111827;
-      background: radial-gradient(circle at top left, rgba(37,99,235,0.12), transparent),
-                  radial-gradient(circle at bottom right, rgba(14,165,233,0.08), transparent);
-    }
-    .history-pill {
-      display: inline-block;
-      border-radius: 999px;
-      padding: 2px 8px;
-      font-size: 10px;
-      background: #0f172a;
-      color: #a855f7;
-    }
-    .small-muted {
+
+    .footer-note {
+      margin-top: 10px;
       font-size: 11px;
-      color: #6b7280;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
     }
-    .empty-state {
-      font-size: 12px;
-      color: #6b7280;
-      padding-top: 6px;
+
+    .link {
+      color: #93c5fd;
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(147, 197, 253, 0.5);
+      padding-bottom: 1px;
+      font-size: 11px;
     }
-    .loading {
-      font-size: 12px;
-      color: #fde68a;
-      margin-left: 8px;
-    }
-    .error-text {
-      font-size: 12px;
-      color: #fecaca;
-      margin-top: 4px;
-    }
-    .risk-high {
-      background: #7f1d1d;
-      color: #fecaca;
-    }
-    .risk-medium {
-      background: #78350f;
-      color: #fef3c7;
-    }
-    .risk-low {
-      background: #064e3b;
-      color: #bbf7d0;
-    }
-    .risk-none {
-      background: #0f172a;
-      color: #9ca3af;
+
+    .link:hover {
+      color: #bfdbfe;
+      border-bottom-style: solid;
     }
   </style>
 </head>
 <body>
-  <div class="sidebar">
-    <h1>Algograss DataShield</h1>
-    <small>GDPR schema &amp; PII scanner</small>
-
-    <div class="api-key-box">
-      <label for="apiKeyInput">API key (optional, for protected mode)</label>
-      <input id="apiKeyInput" type="password" placeholder="X-API-Key value"
-             oninput="setApiKey(this.value)" />
-    </div>
-
-    <button class="btn btn-secondary" onclick="loadDatasources()">↻ Refresh datasources</button>
-
-    <ul id="dsList" class="ds-list"></ul>
-
-    <div class="small-muted">
-      <div>1️⃣ Add datasource via curl or /docs</div>
-      <div>2️⃣ Click “Scan” to analyse schema</div>
-      <div>3️⃣ View history and export JSON</div>
-    </div>
-  </div>
-
-  <div class="main">
-    <div class="top-bar">
-      <div class="status">
-        Selected datasource: <span id="currentDsLabel">none</span>
+  <div class="app-shell">
+    <header>
+      <div class="title-block">
+        <h1>Algograss – DataShield UI</h1>
+        <p>Scan your live Postgres/Supabase schema for PII &amp; risk – then download the full JSON report.</p>
       </div>
-      <div id="globalStatus" class="status"></div>
-    </div>
+      <div>
+        <div class="pill">
+          <span>Backend:</span>
+          <span class="key">/api/datasource</span>
+          <span>+</span>
+          <span class="key">/api/scan</span>
+        </div>
+      </div>
+    </header>
 
-    <div class="panels">
-      <div class="card">
-        <h2>
-          Scan summary
-          <span id="summaryTag" class="tag">no scan yet</span>
-        </h2>
-        <div class="summary-grid" id="summaryGrid">
-          <div class="summary-item">
-            <div class="summary-label">Total columns</div>
-            <div class="summary-value" id="summaryTotal">–</div>
+    <main>
+      <!-- DATASOURCES -->
+      <section class="card">
+        <div class="card-inner">
+          <div class="card-header">
+            <div>
+              <h2>Datasources</h2>
+              <p>Pick a datasource and run a PII scan.</p>
+            </div>
+            <button id="loadDatasourcesBtn" class="btn">
+              <span class="btn-icon">⟳</span>
+              Load datasources
+            </button>
           </div>
-          <div class="summary-item">
-            <div class="summary-label">PII columns</div>
-            <div class="summary-value" id="summaryPii">–</div>
-          </div>
-          <div class="summary-item">
-            <div class="summary-label">PII ratio</div>
-            <div class="summary-value" id="summaryRatio">–</div>
+          <hr class="divider" />
+          <ul id="datasourceList" class="list">
+            <!-- populated by JS -->
+          </ul>
+          <div class="footer-note">
+            <span id="dsStatus" class="scan-status">Waiting to load datasources…</span>
+            <a class="link" href="/docs" target="_blank" rel="noreferrer">Open API docs</a>
           </div>
         </div>
+      </section>
 
-        <h3>Per-table risk (top 5)</h3>
-        <div class="table-container" style="max-height: 120px;">
-          <table class="history-table">
-            <thead>
-              <tr>
-                <th>Table</th>
-                <th>PII cols</th>
-                <th>Ratio</th>
-                <th>Risk</th>
-              </tr>
-            </thead>
-            <tbody id="riskTableBody">
-              <tr><td colspan="4" class="empty-state">Run a scan to see table risk.</td></tr>
-            </tbody>
-          </table>
+      <!-- SCAN RESULT -->
+      <section class="card">
+        <div class="card-inner">
+          <div class="card-header">
+            <div>
+              <h2>Scan Result</h2>
+              <p>Risk score, PII distribution &amp; per-table breakdown.</p>
+            </div>
+            <span id="scanStatePill" class="status-pill">Idle</span>
+          </div>
+          <hr class="divider" />
+
+          <div class="scan-header-row">
+            <div class="scan-meta" id="scanMeta">
+              <span>No scan yet.</span>
+            </div>
+            <div style="display:flex; gap:8px; flex-wrap:wrap;">
+              <button id="downloadReportBtn" class="btn-secondary btn btn-sm" disabled>
+                <span class="btn-icon">⬇</span>
+                Download JSON report
+              </button>
+            </div>
+          </div>
+
+          <div id="scanBody" class="scan-body">
+            <div class="summary-card">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:12px; font-weight:500;">Summary</span>
+                <span id="summaryRiskTag" class="tag">Risk: n/a</span>
+              </div>
+              <div id="summaryEmpty" class="scan-empty" style="margin-top:8px;">
+                Run a scan to see total columns, PII count &amp; overall risk.
+              </div>
+              <div id="summaryGrid" class="summary-grid" style="display:none;">
+                <div class="stat">
+                  <div class="stat-label">Total columns</div>
+                  <div id="statTotalColumns" class="stat-value">-</div>
+                  <div class="stat-sub">All tables in schema</div>
+                </div>
+                <div class="stat">
+                  <div class="stat-label">PII columns</div>
+                  <div id="statPiiColumns" class="stat-value">-</div>
+                  <div class="stat-sub">Email / phone / IP, etc.</div>
+                </div>
+                <div class="stat">
+                  <div class="stat-label">PII ratio</div>
+                  <div id="statPiiRatio" class="stat-value">-</div>
+                  <div class="stat-sub">PII / total columns</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="table-card">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-size:12px; font-weight:500;">Tables by risk</span>
+              </div>
+              <div id="tablesEmpty" class="scan-empty" style="margin-top:8px;">
+                When you run a scan, tables will appear here sorted by risk (High → Low).
+              </div>
+              <div id="tablesList" class="tables-list"></div>
+            </div>
+          </div>
+
+          <div id="scanError" class="scan-error" style="display:none;"></div>
         </div>
-
-        <div id="summaryError" class="error-text"></div>
-      </div>
-
-      <div class="card">
-        <h2>
-          PII fields
-          <span class="tag" id="piiTag">0 columns flagged</span>
-        </h2>
-        <div class="table-container">
-          <table class="pii-table" id="piiTable">
-            <thead>
-              <tr>
-                <th>Table</th>
-                <th>Column</th>
-                <th>Type</th>
-                <th>Reason</th>
-              </tr>
-            </thead>
-            <tbody id="piiTableBody">
-              <tr><td colspan="4" class="empty-state">Run a scan to see PII columns.</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="card">
-        <h2>Schema explorer <span class="tag" id="schemaTag">0 tables</span></h2>
-        <div class="table-container">
-          <table class="schema-table">
-            <thead>
-              <tr>
-                <th>Table</th>
-                <th>Column</th>
-                <th>Type</th>
-                <th>PII?</th>
-              </tr>
-            </thead>
-            <tbody id="schemaTableBody">
-              <tr><td colspan="4" class="empty-state">Run a scan to see schema.</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="card">
-        <h2>
-          Scan history
-          <span class="tag" id="historyTag">no scans yet</span>
-        </h2>
-        <div class="table-container">
-          <table class="history-table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>When (UTC)</th>
-                <th>PII cols</th>
-                <th>Total cols</th>
-                <th>Ratio</th>
-                <th>Export</th>
-              </tr>
-            </thead>
-            <tbody id="historyTableBody">
-              <tr><td colspan="6" class="empty-state">Scan at least once to see history.</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+      </section>
+    </main>
   </div>
 
   <script>
-    let currentDatasourceId = null;
-    let isScanning = false;
-    let apiKey = "";
+    const API_BASE = ""; // relative to same origin
+    const loadBtn = document.getElementById("loadDatasourcesBtn");
+    const dsList = document.getElementById("datasourceList");
+    const dsStatus = document.getElementById("dsStatus");
+    const scanStatePill = document.getElementById("scanStatePill");
+    const scanMeta = document.getElementById("scanMeta");
+    const summaryGrid = document.getElementById("summaryGrid");
+    const summaryEmpty = document.getElementById("summaryEmpty");
+    const tablesList = document.getElementById("tablesList");
+    const tablesEmpty = document.getElementById("tablesEmpty");
+    const scanError = document.getElementById("scanError");
+    const summaryRiskTag = document.getElementById("summaryRiskTag");
+    const statTotalColumns = document.getElementById("statTotalColumns");
+    const statPiiColumns = document.getElementById("statPiiColumns");
+    const statPiiRatio = document.getElementById("statPiiRatio");
+    const downloadReportBtn = document.getElementById("downloadReportBtn");
 
-    function setGlobalStatus(text, isError = false) {
-      const el = document.getElementById("globalStatus");
-      el.textContent = text || "";
-      el.style.color = isError ? "#fecaca" : "#9ca3af";
+    let lastScanResult = null;
+    let lastDatasource = null;
+
+    function setScanState(text, type = "idle") {
+      scanStatePill.textContent = text;
+      scanStatePill.classList.remove("ok", "err");
+      if (type === "ok") scanStatePill.classList.add("ok");
+      if (type === "err") scanStatePill.classList.add("err");
     }
 
-    function setApiKey(value) {
-      apiKey = value.trim();
-      if (apiKey) {
-        setGlobalStatus("Using API key for requests.");
-      } else {
-        setGlobalStatus("No API key set (open mode).");
+    function formatRiskTag(risk) {
+      const tag = summaryRiskTag;
+      tag.classList.remove("tag-risk-low", "tag-risk-medium", "tag-risk-high");
+      if (!risk) {
+        tag.textContent = "Risk: n/a";
+        return;
       }
-    }
-
-    async function apiFetch(url, options = {}) {
-      const opts = { ...options };
-      opts.headers = opts.headers || {};
-      if (apiKey) {
-        opts.headers["X-API-Key"] = apiKey;
-      }
-      return fetch(url, opts);
+      const label = risk.charAt(0).toUpperCase() + risk.slice(1);
+      tag.textContent = `Risk: ${label}`;
+      if (risk === "low") tag.classList.add("tag-risk-low");
+      else if (risk === "medium") tag.classList.add("tag-risk-medium");
+      else if (risk === "high") tag.classList.add("tag-risk-high");
     }
 
     async function loadDatasources() {
-      setGlobalStatus("Loading datasources...");
-      const listEl = document.getElementById("dsList");
-      listEl.innerHTML = "";
-
+      loadBtn.disabled = true;
+      dsStatus.textContent = "Loading datasources…";
+      dsList.innerHTML = "";
       try {
-        const res = await apiFetch("/api/datasource/");
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        const data = await res.json();
-
-        if (!data.length) {
-          listEl.innerHTML = "<li class='small-muted'>No datasources yet. Create one via curl or /docs.</li>";
-          setGlobalStatus("No datasources found.");
-          return;
-        }
-
-        data.forEach(ds => {
-          const li = document.createElement("li");
-          li.className = "ds-item";
-
-          const nameEl = document.createElement("div");
-          nameEl.className = "ds-name";
-          nameEl.textContent = ds.name;
-
-          const idEl = document.createElement("div");
-          idEl.className = "ds-id";
-          idEl.textContent = ds.id;
-
-          const typeEl = document.createElement("div");
-          typeEl.className = "ds-type";
-          typeEl.textContent = `Type: ${ds.type}`;
-
-          const btnRow = document.createElement("div");
-          btnRow.style.marginTop = "6px";
-
-          const scanBtn = document.createElement("button");
-          scanBtn.className = "btn btn-primary";
-          scanBtn.textContent = "Scan";
-          scanBtn.onclick = () => scanDatasource(ds);
-
-          const histBtn = document.createElement("button");
-          histBtn.className = "btn btn-secondary";
-          histBtn.textContent = "History";
-          histBtn.onclick = () => loadHistory(ds.id);
-
-          btnRow.appendChild(scanBtn);
-          btnRow.appendChild(histBtn);
-
-          li.appendChild(nameEl);
-          li.appendChild(idEl);
-          li.appendChild(typeEl);
-          li.appendChild(btnRow);
-
-          listEl.appendChild(li);
-        });
-
-        setGlobalStatus(`Loaded ${data.length} datasource(s).`);
-      } catch (err) {
-        console.error(err);
-        setGlobalStatus("Failed to load datasources.", true);
-        const listEl = document.getElementById("dsList");
-        listEl.innerHTML = "<li class='error-text'>Error loading datasources. Check backend.</li>";
-      }
-    }
-
-    async function scanDatasource(ds) {
-      if (isScanning) return;
-      isScanning = true;
-
-      currentDatasourceId = ds.id;
-      document.getElementById("currentDsLabel").textContent = `${ds.name} (${ds.id})`;
-      document.getElementById("summaryTag").textContent = "scanning...";
-      document.getElementById("summaryTag").className = "tag";
-      document.getElementById("summaryError").textContent = "";
-      setGlobalStatus(`Scanning ${ds.name}...`);
-
-      try {
-        const res = await apiFetch(`/api/scan/${encodeURIComponent(ds.id)}`);
+        const res = await fetch(`${API_BASE}/api/datasource/`);
         if (!res.ok) {
-          const errData = await res.json().catch(() => ({}));
-          const msg = errData.detail || `Scan failed: HTTP ${res.status}`;
-          throw new Error(msg);
+          throw new Error(`HTTP ${res.status}`);
         }
-
-        const data = await res.json();
-        renderSummary(data);
-        renderSchema(data.schema);
-        renderPii(data.schema);
-        await loadHistory(ds.id);
-
-        setGlobalStatus(`Scan completed for ${ds.name}.`);
-      } catch (err) {
-        console.error(err);
-        document.getElementById("summaryError").textContent = err.message;
-        setGlobalStatus("Scan failed: " + err.message, true);
-        document.getElementById("summaryTag").textContent = "error";
-        document.getElementById("summaryTag").className = "tag risk-high";
-      } finally {
-        isScanning = false;
-      }
-    }
-
-    function renderSummary(scan) {
-      const totalEl = document.getElementById("summaryTotal");
-      const piiEl = document.getElementById("summaryPii");
-      const ratioEl = document.getElementById("summaryRatio");
-      const tagEl = document.getElementById("summaryTag");
-      const riskBody = document.getElementById("riskTableBody");
-
-      riskBody.innerHTML = "";
-
-      if (!scan || !scan.summary) {
-        totalEl.textContent = "–";
-        piiEl.textContent = "–";
-        ratioEl.textContent = "–";
-        tagEl.textContent = "no data";
-        tagEl.className = "tag risk-none";
-        riskBody.innerHTML = "<tr><td colspan='4' class='empty-state'>No per-table risk data.</td></tr>";
-        return;
-      }
-
-      const s = scan.summary;
-      totalEl.textContent = s.total_columns;
-      piiEl.textContent = s.pii_columns;
-      ratioEl.textContent = (s.pii_ratio * 100).toFixed(1) + "%";
-
-      const overall = s.overall_risk || "none";
-      let label = "no data";
-      let cls = "tag risk-none";
-
-      if (overall === "high") {
-        label = "High risk";
-        cls = "tag risk-high";
-      } else if (overall === "medium") {
-        label = "Medium risk";
-        cls = "tag risk-medium";
-      } else if (overall === "low") {
-        label = "Low risk";
-        cls = "tag risk-low";
-      } else {
-        label = "No PII risk";
-        cls = "tag risk-none";
-      }
-
-      tagEl.textContent = label;
-      tagEl.className = cls;
-
-      const tableRisks = s.table_risks || {};
-      const entries = Object.entries(tableRisks);
-
-      if (!entries.length) {
-        riskBody.innerHTML = "<tr><td colspan='4' class='empty-state'>No per-table risk data.</td></tr>";
-        return;
-      }
-
-      // Sort by highest PII ratio
-      entries.sort((a, b) => (b[1].pii_ratio || 0) - (a[1].pii_ratio || 0));
-      const top = entries.slice(0, 5);
-
-      top.forEach(([tableName, info]) => {
-        const tr = document.createElement("tr");
-
-        const tdTable = document.createElement("td");
-        tdTable.textContent = tableName;
-
-        const tdPii = document.createElement("td");
-        tdPii.textContent = info.pii_columns;
-
-        const tdRatio = document.createElement("td");
-        tdRatio.textContent = (info.pii_ratio * 100).toFixed(1) + "%";
-
-        const tdRisk = document.createElement("td");
-        tdRisk.textContent = info.risk_level;
-
-        // Colour risk cell
-        if (info.risk_level === "high") {
-          tdRisk.style.color = "#fecaca";
-        } else if (info.risk_level === "medium") {
-          tdRisk.style.color = "#fef3c7";
-        } else if (info.risk_level === "low") {
-          tdRisk.style.color = "#bbf7d0";
-        } else {
-          tdRisk.style.color = "#9ca3af";
-        }
-
-        tr.appendChild(tdTable);
-        tr.appendChild(tdPii);
-        tr.appendChild(tdRatio);
-        tr.appendChild(tdRisk);
-
-        riskBody.appendChild(tr);
-      });
-    }
-
-    function renderSchema(schema) {
-      const body = document.getElementById("schemaTableBody");
-      const tag = document.getElementById("schemaTag");
-      body.innerHTML = "";
-
-      if (!schema || Object.keys(schema).length === 0) {
-        body.innerHTML = "<tr><td colspan='4' class='empty-state'>No columns found.</td></tr>";
-        tag.textContent = "0 tables";
-        return;
-      }
-
-      let tableCount = 0;
-      for (const [tableName, cols] of Object.entries(schema)) {
-        tableCount++;
-        cols.forEach(col => {
-          const tr = document.createElement("tr");
-
-          const tdTable = document.createElement("td");
-          tdTable.textContent = tableName;
-
-          const tdCol = document.createElement("td");
-          tdCol.textContent = col.column;
-
-          const tdType = document.createElement("td");
-          tdType.textContent = col.type;
-
-          const tdPii = document.createElement("td");
-          tdPii.textContent = col.pii ? "PII" : "";
-          tdPii.style.color = col.pii ? "#fecaca" : "#6b7280";
-
-          tr.appendChild(tdTable);
-          tr.appendChild(tdCol);
-          tr.appendChild(tdType);
-          tr.appendChild(tdPii);
-
-          body.appendChild(tr);
-        });
-      }
-
-      tag.textContent = `${tableCount} tables`;
-    }
-
-    function renderPii(schema) {
-      const body = document.getElementById("piiTableBody");
-      const tag = document.getElementById("piiTag");
-      body.innerHTML = "";
-
-      if (!schema || Object.keys(schema).length === 0) {
-        body.innerHTML = "<tr><td colspan='4' class='empty-state'>No columns found.</td></tr>";
-        tag.textContent = "0 columns flagged";
-        return;
-      }
-
-      const rows = [];
-      for (const [tableName, cols] of Object.entries(schema)) {
-        cols.forEach(col => {
-          if (col.pii) {
-            rows.push({ tableName, col });
-          }
-        });
-      }
-
-      if (!rows.length) {
-        body.innerHTML = "<tr><td colspan='4' class='empty-state'>No columns flagged as PII.</td></tr>";
-        tag.textContent = "0 columns flagged";
-        return;
-      }
-
-      rows.forEach(({ tableName, col }) => {
-        const tr = document.createElement("tr");
-
-        const tdTable = document.createElement("td");
-        tdTable.textContent = tableName;
-
-        const tdCol = document.createElement("td");
-        tdCol.innerHTML = `<span class="pii-pill">${col.column}</span>`;
-
-        const tdType = document.createElement("td");
-        tdType.textContent = col.type;
-
-        const tdReason = document.createElement("td");
-        tdReason.textContent = (col.pii_reason || []).join(", ");
-
-        tr.appendChild(tdTable);
-        tr.appendChild(tdCol);
-        tr.appendChild(tdType);
-        tr.appendChild(tdReason);
-
-        body.appendChild(tr);
-      });
-
-      tag.textContent = `${rows.length} columns flagged`;
-    }
-
-    async function loadHistory(dsId) {
-      const body = document.getElementById("historyTableBody");
-      const tag = document.getElementById("historyTag");
-      body.innerHTML = "<tr><td colspan='6' class='empty-state'>Loading history...</td></tr>";
-
-      try {
-        const res = await apiFetch(`/api/scan/history/${encodeURIComponent(dsId)}`);
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        const data = await res.json();
-
-        if (!data.length) {
-          body.innerHTML = "<tr><td colspan='6' class='empty-state'>No history for this datasource yet.</td></tr>";
-          tag.textContent = "no scans yet";
+        const datasources = await res.json();
+        if (!Array.isArray(datasources) || datasources.length === 0) {
+          dsStatus.textContent = "No datasources yet. Create one via the API docs.";
           return;
         }
+        dsStatus.textContent = `Loaded ${datasources.length} datasource(s).`;
+        for (const ds of datasources) {
+          const li = document.createElement("li");
+          li.className = "list-item";
+          const main = document.createElement("div");
+          main.className = "list-item-main";
 
-        body.innerHTML = "";
-        data.forEach(entry => {
-          const tr = document.createElement("tr");
+          const name = document.createElement("div");
+          name.className = "ds-name";
+          name.textContent = ds.name || "Unnamed datasource";
 
-          const tdId = document.createElement("td");
-          tdId.textContent = entry.id;
+          const meta = document.createElement("div");
+          meta.className = "ds-meta";
 
-          const tdTime = document.createElement("td");
-          tdTime.textContent = entry.scanned_at;
+          const typeSpan = document.createElement("span");
+          typeSpan.textContent = `Type: ${ds.type || "?"}`;
+          meta.appendChild(typeSpan);
 
-          const s = entry.summary || {};
-          const tdPii = document.createElement("td");
-          tdPii.textContent = s.pii_columns ?? "-";
+          const idSpan = document.createElement("span");
+          idSpan.className = "code";
+          idSpan.textContent = ds.id;
+          meta.appendChild(idSpan);
 
-          const tdTotal = document.createElement("td");
-          tdTotal.textContent = s.total_columns ?? "-";
+          const host = ds.config && ds.config.host ? ds.config.host : "unknown host";
+          const hostSpan = document.createElement("span");
+          hostSpan.textContent = host;
+          meta.appendChild(hostSpan);
 
-          const tdRatio = document.createElement("td");
-          if (typeof s.pii_ratio === "number") {
-            tdRatio.textContent = (s.pii_ratio * 100).toFixed(1) + "%";
-          } else {
-            tdRatio.textContent = "-";
-          }
+          main.appendChild(name);
+          main.appendChild(meta);
 
-          const tdExport = document.createElement("td");
-          const exportLink = document.createElement("a");
-          exportLink.href = "#";
-          exportLink.textContent = "Download JSON";
-          exportLink.onclick = async (e) => {
-            e.preventDefault();
-            try {
-              const res = await apiFetch(`/api/scan/export/${entry.id}`);
-              if (!res.ok) throw new Error("HTTP " + res.status);
-              const blob = await res.blob();
-              const url = URL.createObjectURL(blob);
-              const a = document.createElement("a");
-              a.href = url;
-              a.download = `scan_${entry.id}.json`;
-              document.body.appendChild(a);
-              a.click();
-              document.body.removeChild(a);
-              URL.revokeObjectURL(url);
-              setGlobalStatus(`Exported scan ${entry.id} as JSON.`);
-            } catch (err) {
-              console.error(err);
-              setGlobalStatus("Export failed: " + err.message, true);
-            }
-          };
-          tdExport.appendChild(exportLink);
+          const btn = document.createElement("button");
+          btn.className = "btn btn-sm";
+          btn.textContent = "Scan";
+          btn.addEventListener("click", () => runScan(ds));
 
-          tr.appendChild(tdId);
-          tr.appendChild(tdTime);
-          tr.appendChild(tdPii);
-          tr.appendChild(tdTotal);
-          tr.appendChild(tdRatio);
-          tr.appendChild(tdExport);
-
-          body.appendChild(tr);
-        });
-
-        tag.textContent = `${data.length} scan(s)`;
+          li.appendChild(main);
+          li.appendChild(btn);
+          dsList.appendChild(li);
+        }
       } catch (err) {
-        console.error(err);
-        body.innerHTML = "<tr><td colspan='6' class='error-text'>Failed to load history.</td></tr>";
-        tag.textContent = "error";
+        console.error("Error loading datasources", err);
+        dsStatus.textContent = "Failed to load datasources.";
+      } finally {
+        loadBtn.disabled = false;
       }
     }
 
-    // On page load
-    window.addEventListener("load", () => {
-      setGlobalStatus("No API key set (open mode).");
-      loadDatasources();
+    function sortTablesByRisk(schema) {
+      const rows = [];
+      for (const [tableName, columns] of Object.entries(schema || {})) {
+        let piiCols = 0;
+        let total = columns.length;
+        for (const col of columns) {
+          if (col.pii) piiCols += 1;
+        }
+        const ratio = total === 0 ? 0 : piiCols / total;
+        let risk = "low";
+        if (ratio > 0.4) risk = "high";
+        else if (ratio > 0.15) risk = "medium";
+        rows.push({ tableName, total, piiCols, ratio, risk });
+      }
+      rows.sort((a, b) => {
+        const order = { high: 0, medium: 1, low: 2 };
+        if (order[a.risk] !== order[b.risk]) {
+          return order[a.risk] - order[b.risk];
+        }
+        return b.piiCols - a.piiCols;
+      });
+      return rows;
+    }
+
+    function renderScanResult(result, datasource) {
+      lastScanResult = result;
+      lastDatasource = datasource || null;
+
+      const dsName = datasource?.name || "datasource";
+      const dsId = datasource?.id || result.datasource_id || "unknown";
+
+      const total = result.summary?.total_columns ?? null;
+      const pii = result.summary?.pii_columns ?? null;
+      const ratio = result.summary?.pii_ratio ?? null;
+      const risk = result.summary?.risk_level ?? null;
+
+      // Meta line
+      scanMeta.innerHTML = "";
+      const frag = document.createDocumentFragment();
+
+      const span1 = document.createElement("span");
+      span1.textContent = "Scanned ";
+      const strong1 = document.createElement("span");
+      strong1.className = "value";
+      strong1.textContent = dsName;
+      span1.appendChild(strong1);
+      frag.appendChild(span1);
+
+      const span2 = document.createElement("span");
+      span2.textContent = "ID ";
+      const strong2 = document.createElement("span");
+      strong2.className = "value";
+      strong2.textContent = dsId;
+      span2.appendChild(strong2);
+      frag.appendChild(span2);
+
+      if (risk) {
+        const span3 = document.createElement("span");
+        span3.textContent = "Risk ";
+        const strong3 = document.createElement("span");
+        strong3.className = "value";
+        strong3.textContent = risk.toUpperCase();
+        span3.appendChild(strong3);
+        frag.appendChild(span3);
+      }
+
+      scanMeta.appendChild(frag);
+
+      // Summary stats
+      if (total != null && pii != null && ratio != null) {
+        summaryEmpty.style.display = "none";
+        summaryGrid.style.display = "grid";
+        statTotalColumns.textContent = total;
+        statPiiColumns.textContent = pii;
+        statPiiRatio.textContent = (ratio * 100).toFixed(1) + "%";
+        formatRiskTag(risk);
+      } else {
+        summaryEmpty.style.display = "block";
+        summaryGrid.style.display = "none";
+        formatRiskTag(null);
+      }
+
+      // Tables list
+      tablesList.innerHTML = "";
+      const rows = sortTablesByRisk(result.schema);
+      if (rows.length === 0) {
+        tablesEmpty.style.display = "block";
+      } else {
+        tablesEmpty.style.display = "none";
+        for (const row of rows) {
+          const div = document.createElement("div");
+          div.className = "table-item";
+
+          const header = document.createElement("div");
+          header.className = "table-item-header";
+
+          const name = document.createElement("div");
+          name.className = "table-name";
+          name.textContent = row.tableName;
+          header.appendChild(name);
+
+          const tag = document.createElement("span");
+          tag.className = "tag";
+          if (row.risk === "low") tag.classList.add("tag-risk-low");
+          if (row.risk === "medium") tag.classList.add("tag-risk-medium");
+          if (row.risk === "high") tag.classList.add("tag-risk-high");
+          tag.textContent =
+            row.risk.charAt(0).toUpperCase() + row.risk.slice(1) + " risk";
+          header.appendChild(tag);
+
+          div.appendChild(header);
+
+          const meta = document.createElement("div");
+          meta.className = "table-meta";
+          const m1 = document.createElement("span");
+          m1.textContent = `Columns: ${row.total}`;
+          const m2 = document.createElement("span");
+          m2.textContent = `PII: ${row.piiCols}`;
+          const m3 = document.createElement("span");
+          m3.textContent = `PII ratio: ${(row.ratio * 100).toFixed(1)}%`;
+          meta.appendChild(m1);
+          meta.appendChild(m2);
+          meta.appendChild(m3);
+
+          div.appendChild(meta);
+          tablesList.appendChild(div);
+        }
+      }
+
+      // Enable download button
+      downloadReportBtn.disabled = false;
+      scanError.style.display = "none";
+      scanError.textContent = "";
+      setScanState("Scan complete", "ok");
+    }
+
+    async function runScan(datasource) {
+      if (!datasource || !datasource.id) return;
+      const id = datasource.id;
+
+      setScanState("Scanning…");
+      scanMeta.textContent = `Scanning ${datasource.name || "datasource"} (${id})…`;
+      downloadReportBtn.disabled = true;
+      scanError.style.display = "none";
+      scanError.textContent = "";
+
+      try {
+        const res = await fetch(`${API_BASE}/api/scan/${encodeURIComponent(id)}`);
+        if (!res.ok) {
+          const text = await res.text();
+          throw new Error(`HTTP ${res.status}: ${text}`);
+        }
+        const data = await res.json();
+        renderScanResult(data, datasource);
+      } catch (err) {
+        console.error("Scan error", err);
+        setScanState("Scan failed", "err");
+        scanError.style.display = "block";
+        scanError.textContent =
+          "Error scanning datasource:\n" + (err.message || String(err));
+      }
+    }
+
+    function downloadJsonReport() {
+      if (!lastScanResult) {
+        alert("Run a scan first, then you can download the JSON report.");
+        return;
+      }
+      try {
+        const jsonStr = JSON.stringify(lastScanResult, null, 2);
+        const blob = new Blob([jsonStr], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        const dsId =
+          lastDatasource?.id ||
+          lastScanResult.datasource_id ||
+          "datasource";
+        const ts = new Date().toISOString().replace(/[:.]/g, "-");
+        a.href = url;
+        a.download = `algograss-report-${dsId}-${ts}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(url), 1000);
+      } catch (err) {
+        console.error("Download error", err);
+        alert("Could not generate download. Check console for details.");
+      }
+    }
+
+    loadBtn.addEventListener("click", loadDatasources);
+    downloadReportBtn.addEventListener("click", downloadJsonReport);
+
+    // Auto-load datasources on page load
+    window.addEventListener("DOMContentLoaded", () => {
+      loadDatasources().catch((e) => console.error(e));
     });
   </script>
 </body>
