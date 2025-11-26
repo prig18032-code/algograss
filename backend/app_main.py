@@ -1,62 +1,47 @@
-from fastapi import FastAPI
-from fastapi.openapi.utils import get_openapi
-from fastapi.staticfiles import StaticFiles
+from pathlib import Path
 
-from datasource_api import router as datasource_router
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+
+from datasource_api import router as ds_router
 from scanner_api import router as scan_router
 
-app = FastAPI(title="Algograss DataShield API", version="1.0")
+app = FastAPI(title="Algograss - DataShield API", version="0.1.0")
 
-# Mount UI
-app.mount("/static", StaticFiles(directory="static"), name="static")
+# Allow all origins for now (local dev)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-# Routers
-app.include_router(datasource_router, prefix="/api/datasource", tags=["datasource"])
-app.include_router(scan_router, prefix="/api/scan", tags=["scan"])
+# Include routers
+app.include_router(ds_router)
+app.include_router(scan_router)
+
+# Static files (for UI)
+BASE_DIR = Path(__file__).parent
+STATIC_DIR = BASE_DIR / "static"
+
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 
 @app.get("/")
 def root():
-    return {"message": "Welcome to Algograss - API is running (UI at /ui)"}
-
-
-@app.get("/health")
-def health():
-    return {"status": "ok"}
+    return {"status": "ok", "message": "Algograss backend running"}
 
 
 @app.get("/ui")
-def ui():
-    return {"ui": "/static/index.html"}
+def ui_root():
+    """Main UI page"""
+    return FileResponse(STATIC_DIR / "index.html")
 
 
-# ---- SWAGGER AUTHORIZE BUTTON SUPPORT BELOW ----
-
-def custom_openapi():
-    if app.openapi_schema:
-        return app.openapi_schema
-
-    openapi_schema = get_openapi(
-        title="Algograss DataShield API",
-        version="1.0",
-        description="GDPR / PII Scanner API",
-        routes=app.routes,
-    )
-
-    # Add API Key Auth
-    openapi_schema["components"]["securitySchemes"] = {
-        "ApiKeyAuth": {
-            "type": "apiKey",
-            "in": "header",
-            "name": "X-API-Key"
-        }
-    }
-
-    # Apply globally
-    openapi_schema["security"] = [{"ApiKeyAuth": []}]
-
-    app.openapi_schema = openapi_schema
-    return app.openapi_schema
-
-
-app.openapi = custom_openapi
+@app.get("/ui/")
+def ui_root_slash():
+    """Handle /ui/ (with trailing slash) so it doesn't 404"""
+    return FileResponse(STATIC_DIR / "index.html")

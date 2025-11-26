@@ -1,66 +1,70 @@
-from fastapi import APIRouter, HTTPException, Header
-from pydantic import BaseModel
 import json
-import os
 import uuid
+from pydantic import BaseModel
+from fastapi import APIRouter, HTTPException
 
 router = APIRouter()
 
-DATA_FILE = "datasources.json"
-API_KEY = os.environ.get("API_KEY", "changeme")
+DATASOURCE_FILE = "datasources.json"
+
+
+class DataSourceConfig(BaseModel):
+    host: str
+    port: int
+    database: str
+    user: str
+    password: str
 
 
 class DataSourceIn(BaseModel):
     name: str
     type: str
-    config: dict
+    config: DataSourceConfig
 
 
-def load_data():
-    if not os.path.exists(DATA_FILE):
+class DataSourceOut(DataSourceIn):
+    id: str
+
+
+def load_datasources():
+    try:
+        with open(DATASOURCE_FILE, "r") as f:
+            return json.load(f)
+    except:
         return []
-    with open(DATA_FILE, "r") as f:
-        return json.load(f)
 
 
-def save_data(data):
-    with open(DATA_FILE, "w") as f:
-        json.dump(data, f, indent=2)
+def save_datasources(data):
+    with open(DATASOURCE_FILE, "w") as f:
+        json.dump(data, f, indent=4)
 
 
-def require_key(x_api_key: str = Header(None)):
-    if x_api_key != API_KEY:
-        raise HTTPException(status_code=401, detail="Invalid or missing API key")
+@router.get("/api/datasource/")
+def list_datasources():
+    return load_datasources()
 
 
-@router.get("/")
-def list_datasources(x_api_key: str = Header(None)):
-    require_key(x_api_key)
-    return load_data()
+@router.post("/api/datasource/")
+def create_datasource(ds: DataSourceIn):
+
+    data = load_datasources()
+
+    record = ds.dict()
+    record["id"] = str(uuid.uuid4())
+
+    data.append(record)
+    save_datasources(data)
+
+    return {"message": "Datasource created successfully", "id": record["id"]}
 
 
-@router.post("/")
-def create_datasource(ds: DataSourceIn, x_api_key: str = Header(None)):
-    require_key(x_api_key)
-    data = load_data()
+@router.get("/api/datasource/{ds_id}")
+def get_datasource(ds_id: str):
 
-    new_ds = {
-        "id": str(uuid.uuid4()),
-        "name": ds.name,
-        "type": ds.type,
-        "config": ds.config
-    }
+    data = load_datasources()
 
-    data.append(new_ds)
-    save_data(data)
-    return new_ds
-
-
-@router.get("/{ds_id}")
-def get_datasource(ds_id: str, x_api_key: str = Header(None)):
-    require_key(x_api_key)
-    data = load_data()
     for ds in data:
         if ds["id"] == ds_id:
             return ds
-    raise HTTPException(status_code=404, detail="Datasource not found")
+
+    raise HTTPException(404, "Datasource not found")
